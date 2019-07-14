@@ -3,34 +3,48 @@ package org.apluscreators.googletranslatelabs.xml;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
-import org.apluscreators.googletranslatelabs.model.Strings;
+import org.apluscreators.googletranslatelabs.model.String;
 import org.apluscreators.googletranslatelabs.model.Resources;
+import org.apluscreators.googletranslatelabs.translate.GoogleTranslateFactory;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 public class XmlParserReader {
 
-    public void executeParser() {
-        Resources resources = new Resources();
+    public void executeXmlAndTranslationParser(java.lang.String targetLanguage) {
+//        Resources resources = new Resources();
+//
+//        String[] stringsEntries = getContentEntries();
+//
+//        resources.setStrings(stringsEntries);
+//
+//        System.out.println("Content Root | " + resources);
+//
+//        toXml(resources);
 
-        Strings[] stringsEntries = getContentEntries();
+       Resources untranslatedResources = fromXml();
 
-        resources.setStrings(stringsEntries);
+        GoogleTranslateFactory translateFactory = new GoogleTranslateFactory(untranslatedResources);
+        Resources translatedResources = translateFactory.getTranslatedResources(targetLanguage);
 
-        System.out.println("Content Root | " + resources);
+        for (String string : translatedResources.getStrings()) {
+            System.out.println(string);
+        }
 
-        toXml(resources);
+        toXml(translatedResources,targetLanguage + ".xml");
     }
 
 
-    public void toXml(Resources contentRoot){
+    public void toXml(Resources contentRoot,java.lang.String outputFileName) {
         try {
             JAXBContext contextObj = JAXBContext.newInstance(Resources.class);
             Marshaller marshallerObj = contextObj.createMarshaller();
             marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshallerObj.marshal(contentRoot, new FileOutputStream("output.xml"));
+            marshallerObj.marshal(contentRoot, new FileOutputStream(outputFileName));
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -40,9 +54,30 @@ public class XmlParserReader {
 
     }
 
-    private Strings[] getContentEntries() {
-        Strings[] contentEntries = {
-                new Strings("app_name","Learn Physics"),
+    public Resources fromXml() {
+        try {
+
+            File file = new File("/home/muzima/GoogleTranslateLabs/output.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Resources.class);
+
+            Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
+            Resources resources = (Resources) jaxbContextUnmarshaller.unmarshal(file);
+
+            System.out.println("Resources | " + resources);
+
+            return resources;
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+
+            return null;
+        }
+    }
+
+    private String[] getContentEntries() {
+        String[] contentEntries = {
+                new String("app_name", "Learn Physics"),
+
         };
 
         return contentEntries;

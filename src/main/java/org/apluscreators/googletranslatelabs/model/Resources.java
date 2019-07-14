@@ -1,23 +1,25 @@
 package org.apluscreators.googletranslatelabs.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
 
 @XmlRootElement
 public class Resources {
 
-    private Strings[] strings;
+    private String[] strings;
 
-    public Strings[] getStrings() {
+    @XmlElement
+    public String[] getStrings() {
         return strings;
     }
 
-    public void setStrings(Strings[] strings) {
+    public void setStrings(String[] strings) {
         this.strings = strings;
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Resources{" +
                 "strings=" + Arrays.toString(strings) +
                 '}';
