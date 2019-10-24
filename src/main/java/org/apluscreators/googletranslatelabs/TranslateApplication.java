@@ -1,35 +1,44 @@
 package org.apluscreators.googletranslatelabs;
 
+
 import org.apluscreators.googletranslatelabs.xml.XmlParserReader;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class TranslateApplication {
 
+    private static final Logger LOGGER = Logger.getLogger(TranslateApplication.class.getName());
+
     private static final List<String> languages = Arrays.asList(
-            "ja", "nb", "nl", "uk", "hi", "da",
-            "ca", "hr", "et", "hu", "kk", "lv",
-            "in", "ko", "vi", "th", "sq", "ar",
-            "be", "fil", "bg", "bs", "cs", "el",
-            "es", "it", "zh", "vi", "th", "pt",
-            "pl", "no", "nn", "nl", "nb", "is",
-            "fr", "et", "fi", "ms", "ne", "fa",
-            "af", "am", "hy", "az", "bn", "my",
-            "et", "fi", "gl", "ka", "iw", "hi",
-            "hu", "is", "id", "kn", "km", "ky",
-            "lo", "lv", "mk", "ms", "ml", "mr",
-            "mn", "ne", "no", "fa", "pl", "pa",
-            "ro", "rm", "ru", "sr", "si", "sk",
-            "sl", "es", "sw", "sv", "ta", "tr",
-            "zu"
+            "ro", "sr", "sv", "ur", "ha", "pa", "te", "jv", "ml", "mr", "mn", "mk", "my", "pl",
+            "hy", "iw", "id", "in", "km", "ky", "ka",
+            "no", "nn", "nl", "nb", "ne", "nb", "ar",
+            "be", "bg", "bs", "ca", "cs", "da", "de", "es", "et", "el", "uk", "vi",
+            "pt", "hi", "hr", "hu", "lv", "ms", "th",
+            "sw", "sq", "it", "is", "fi"
+            ,"ja", "ru", "ga", "zh", "si", "sk", "sl",
+            "ta", "tr", "zu", "fa", "gl",
+            "ar", "be", "bg", "bs", "ca", "cs",
+            "da", "de", "es", "et", "el",
+            "uk", "vi", "pt", "hi", "hr", "hu",
+            "lv", "ms", "th", "sw", "sq",
+            "it", "is", "lo", "fil", "fr"
+            ,"ru", "ga", "ko", "zh", "af", "am", "az", "bn",
+            "si", "sk", "sl", "ta", "tr", "zu", "fa", "gl", "ja"
     );
 
+    private static final Set<String> uniqueLanguagesList = new HashSet<>(languages);
 
     public static void main(String[] args) {
 
-        List<String> distinctLanguages = languages.stream()
+        checkForDuplicates(languages);
+
+        List<String> distinctLanguages = uniqueLanguagesList.stream()
                 .distinct()
                 .peek(System.out::println)
                 .collect(Collectors.toList());
@@ -39,7 +48,10 @@ public class TranslateApplication {
             xmlParserReader.executeXmlAndTranslationParser(language);
         }
 
+    }
 
-
+    public static void checkForDuplicates(List<String> languages) {
+        LOGGER.info("Original List" + languages);
+        LOGGER.info("Unique List " + uniqueLanguagesList);
     }
 }

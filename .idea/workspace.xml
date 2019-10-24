@@ -4,32 +4,8 @@
     <list default="true" id="34360509-d6aa-4191-bf99-4eb98633aeae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/TranslateApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/TranslateApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Google-Translate-Labs-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Google-Translate-Labs-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ca.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/da.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/et.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hi.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hr.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hu.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/in.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ja.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/kk.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ko.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lv.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nb.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/th.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/uk.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/vi.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -45,19 +21,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/TranslateApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+            <state relative-caret-position="263">
+              <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/TranslateApplication.java">
+        <entry file="file://$PROJECT_DIR$/target/ro.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+            <state relative-caret-position="95">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/model/Resources.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,10 +54,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/translate/GoogleTranslateFactory.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/xml/XmlParserReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="380">
+              <caret line="20" column="53" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -80,8 +68,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/output.xml">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -115,12 +112,31 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>string</find>
-      <find>string&gt;</find>
       <find>ab</find>
+      <find>strings-arr</find>
+      <find>string&gt;</find>
+      <find>fr</find>
+      <find>string</find>
+      <find>lg</find>
+      <find>vi</find>
+      <find>ro</find>
+      <find>se</find>
+      <find>*</find>
+      <find>ur</find>
+      <find>ha</find>
+      <find>pa</find>
+      <find>&quot;lo&quot;</find>
+      <find>&quot;fil&quot;,</find>
+      <find>&quot;fr&quot;</find>
+      <find>&quot;ko&quot;</find>
     </findStrings>
     <replaceStrings>
+      <replace>CHAPTER_THIRTY</replace>
+      <replace>CHAPTER_FOURTY</replace>
+      <replace>CHAPTER_FIFTY</replace>
+      <replace>&lt;strings</replace>
       <replace>strings&gt;</replace>
+      <replace>strings</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -143,8 +159,8 @@
         <option value="$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/model/String.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/translate/GoogleTranslateFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/xml/XmlParserReader.java" />
-        <option value="$PROJECT_DIR$/output.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/output.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/TranslateApplication.java" />
       </list>
     </option>
@@ -157,10 +173,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="80" />
-    <option name="y" value="27" />
-    <option name="width" value="846" />
-    <option name="height" value="1052" />
+    <option name="x" value="298" />
+    <option name="y" value="158" />
+    <option name="width" value="1391" />
+    <option name="height" value="791" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -168,8 +184,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,18 +246,25 @@
             </path>
             <path>
               <item name="GoogleTranslateLabs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GoogleTranslateLabs" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GoogleTranslateLabs" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -306,8 +327,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.4349751" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25401217" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -323,9 +345,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.5215983" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.64902806" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32829374" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32792208" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -352,13 +374,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/model.java" />
-    <entry file="file://$PROJECT_DIR$/target/classes/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/target/classes/strings.xml" />
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/javax/xml/bind/annotation/XmlAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -376,20 +392,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/emma.xml" />
     <entry file="file://$PROJECT_DIR$/target/emma.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/xml/XmlParserReader.java">
+    <entry file="file://$PROJECT_DIR$/target/lv.xml" />
+    <entry file="file://$PROJECT_DIR$/target/in.xml" />
+    <entry file="file://$PROJECT_DIR$/target/sq.xml" />
+    <entry file="file://$PROJECT_DIR$/target/fi.xml" />
+    <entry file="file://$PROJECT_DIR$/target/nb.xml" />
+    <entry file="file://$PROJECT_DIR$/target/nl.xml" />
+    <entry file="file://$PROJECT_DIR$/target/et.xml" />
+    <entry file="file://$PROJECT_DIR$/target/vi.xml" />
+    <entry file="file://$PROJECT_DIR$/target/ja.xml" />
+    <entry file="file://$PROJECT_DIR$/target/ne.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/translate/GoogleTranslateFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/model/Resources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        <state relative-caret-position="608">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -398,8 +414,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/model/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="171">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/af.xml" />
+    <entry file="file://$PROJECT_DIR$/target/am.xml" />
+    <entry file="file://$PROJECT_DIR$/target/az.xml" />
+    <entry file="file://$PROJECT_DIR$/target/bn.xml" />
+    <entry file="file://$PROJECT_DIR$/target/sv.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/model/Resources.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -417,36 +451,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/output.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/xml/XmlParserReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/lv.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/nb.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/in.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/ja.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/sq.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/translate/GoogleTranslateFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="380">
+          <caret line="20" column="53" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -455,18 +463,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+        <state relative-caret-position="285">
+          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="563" column="6" selection-start-line="563" selection-start-column="6" selection-end-line="563" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apluscreators/googletranslatelabs/TranslateApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        <state relative-caret-position="263">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/ro.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>

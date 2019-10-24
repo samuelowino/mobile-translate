@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+    <strings name="general_edit_action">Redigera</strings>
+    <strings name="general_sell_action">Sälja</strings>
+</resources>

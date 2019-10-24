@@ -1,0 +1,4 @@
+<resources>
+    <strings name="general_edit_action">Edit</strings>
+    <strings name="general_sell_action">Sell</strings>
+</resources>

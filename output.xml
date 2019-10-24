@@ -1,20 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resources>
-    <strings name="title">Life Planner</strings>
-    <strings name="short_description">The Best-Selling Planner Proven To Help With Organization and Productivity</strings>
-    <strings name="full_description">LifePlanner™  aims to increase your productivity by organizing your life to focus on your goals.
-
-Plan for tomorrow and celebrate today with this award-winning app that's proven to increase productivity and time management. 94% of customers agree that LifePlanner™ helped them better organize their life. Try it for yourself today!
-
-WHY LIFE PLANNER™ ?
-– The Ultimate daily/Weekly/monthly and even yearly Planning System
-– Perfect for Planning Aficionados and Newbies Alike!
-– Completely Customizable and Personalizable
-– Filled With Designer Details, Inspiration and Extras!
-
-Special thanks to:
-eucalyp  [https://www.flaticon.com/authors/eucalyp] from www.flaticon.com for design icons and the whole flaticon.com team. 
-
-Background photo created by ijeab - www.freepik.com</strings>
-
+    <strings name="general_edit_action">Edit</strings>
+    <strings name="general_sell_action">Sell</strings>
 </resources>
