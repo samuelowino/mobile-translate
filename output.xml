@@ -1,4 +1,5 @@
 <resources>
-    <strings name="general_edit_action">Edit</strings>
-    <strings name="general_sell_action">Sell</strings>
+    <strings name="general_todays_schedule">Today\'s Schedule</strings>
+    <strings name="general_overdue_tasks">Overdue tasks</strings>
+    <strings name="general_pending_tasks">Pending tasks</strings>
 </resources>

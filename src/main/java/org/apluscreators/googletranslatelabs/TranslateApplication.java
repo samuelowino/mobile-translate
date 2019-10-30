@@ -15,21 +15,11 @@ public class TranslateApplication {
     private static final Logger LOGGER = Logger.getLogger(TranslateApplication.class.getName());
 
     private static final List<String> languages = Arrays.asList(
-            "ro", "sr", "sv", "ur", "ha", "pa", "te", "jv", "ml", "mr", "mn", "mk", "my", "pl",
-            "hy", "iw", "id", "in", "km", "ky", "ka",
-            "no", "nn", "nl", "nb", "ne", "nb", "ar",
-            "be", "bg", "bs", "ca", "cs", "da", "de", "es", "et", "el", "uk", "vi",
-            "pt", "hi", "hr", "hu", "lv", "ms", "th",
-            "sw", "sq", "it", "is", "fi"
-            ,"ja", "ru", "ga", "zh", "si", "sk", "sl",
-            "ta", "tr", "zu", "fa", "gl",
-            "ar", "be", "bg", "bs", "ca", "cs",
-            "da", "de", "es", "et", "el",
-            "uk", "vi", "pt", "hi", "hr", "hu",
-            "lv", "ms", "th", "sw", "sq",
-            "it", "is", "lo", "fil", "fr"
-            ,"ru", "ga", "ko", "zh", "af", "am", "az", "bn",
-            "si", "sk", "sl", "ta", "tr", "zu", "fa", "gl", "ja"
+            "ha", "pl", "af", "am", "ar", "az", "be", "bg", "bn", "bs", "fr", "ga", "hi", "hu", "id", "is",
+            "ca", "cs", "da", "de", "el", "es", "et", "fa", "fi", "fil", "gl", "hr", "hy", "in",
+            "it", "iw", "ja", "jv", "ka", "km", "ko", "ky", "lo", "lv", "mk", "ml", "mn", "mr", "ms",
+            "my", "nb", "ne", "nl", "nn", "no", "pa", "pt", "ro", "ru", "si", "sk", "sl", "sq", "sr",
+            "sv", "sw", "ta", "te", "th", "tr", "uk", "ur", "vi", "zh", "zu", "kn", "kk"
     );
 
     private static final Set<String> uniqueLanguagesList = new HashSet<>(languages);
