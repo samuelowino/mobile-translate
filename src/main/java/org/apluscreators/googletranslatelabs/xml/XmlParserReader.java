@@ -16,15 +16,6 @@ import java.io.FileOutputStream;
 public class XmlParserReader {
 
     public void executeXmlAndTranslationParser(java.lang.String targetLanguage) {
-//        Resources resources = new Resources();
-//
-//        String[] stringsEntries = getContentEntries();
-//
-//        resources.setStrings(stringsEntries);
-//
-//        System.out.println("Content Root | " + resources);
-//
-//        toXml(resources);
 
        Resources untranslatedResources = fromXml();
 
@@ -57,7 +48,7 @@ public class XmlParserReader {
     public Resources fromXml() {
         try {
 
-            File file = new File("/home/muzima/GoogleTranslateLabs/output.xml");
+            File file = new File("C:/Users/hp/projects/Google-Translate-Script/output.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Resources.class);
 
             Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
@@ -76,7 +67,7 @@ public class XmlParserReader {
 
     private String[] getContentEntries() {
         String[] contentEntries = {
-                new String("app_name", "Learn Physics"),
+                new String("app_name", "app-name"),
 
         };
 

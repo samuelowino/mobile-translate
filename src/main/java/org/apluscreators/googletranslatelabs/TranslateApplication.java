@@ -15,11 +15,12 @@ public class TranslateApplication {
     private static final Logger LOGGER = Logger.getLogger(TranslateApplication.class.getName());
 
     private static final List<String> languages = Arrays.asList(
-            "ha", "pl", "af", "am", "ar", "az", "be", "bg", "bn", "bs", "fr", "ga", "hi", "hu", "id", "is",
-            "ca", "cs", "da", "de", "el", "es", "et", "fa", "fi", "fil", "gl", "hr", "hy", "in",
-            "it", "iw", "ja", "jv", "ka", "km", "ko", "ky", "lo", "lv", "mk", "ml", "mn", "mr", "ms",
-            "my", "nb", "ne", "nl", "nn", "no", "pa", "pt", "ro", "ru", "si", "sk", "sl", "sq", "sr",
-            "sv", "sw", "ta", "te", "th", "tr", "uk", "ur", "vi", "zh", "zu", "kn", "kk"
+            "ha", "pl", "am", "ar", "az", "be", "bg", "bn", "bs", "fr", "ga",
+            "ca", "cs", "da", "es", "et", "fa", "fi", "gl",
+            "it", "iw", "ja", "jv", "ka", "km", "ko", "ky",
+            "my", "nb", "ne", "nl", "nn", "no", "pa", "ro", "ru", "si", "sk", "sl", "sq", "sr",
+            "sv", "sw", "ta", "te", "th", "tr", "vi", "zh", "zu", "kn", "kk",
+            "af","de", "fil","hi","hr", "hu","hy","id","in","lo","lv","mk","ml","mn","pt","uk","ur","ms","is","el","mr"
     );
 
     private static final Set<String> uniqueLanguagesList = new HashSet<>(languages);

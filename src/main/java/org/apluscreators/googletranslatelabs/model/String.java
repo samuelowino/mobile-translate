@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- * <string name="app_name">Life Planner™</string>
  */
 
 public class String {

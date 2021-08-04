@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="GoogleTranslateLabs" />
+        <module name="Google-Translate-Labs" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Google-Translate-Labs" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>
