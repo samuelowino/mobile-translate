@@ -3,3 +3,6 @@ credentials/
 .idea
 .idea/
 /.idea
+output.xml
+target/
+/target
