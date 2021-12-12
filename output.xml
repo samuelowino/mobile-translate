@@ -1,3 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resources>
+    <strings name="general_33_off">33% Off</strings>
+    <strings name="general_it_is_time_write_your_journal">it is time to write your journal</strings>
+    <strings name="task_suggest_call">"Call "</strings>
+    <strings name="task_suggest_buy">"Buy "</strings>
+    <strings name="task_suggest_clean">"Clean "</strings>
+    <strings name="task_suggest_email">"Email "</strings>
+    <strings name="task_suggest_work">"Work "</strings>
+    <strings name="task_suggest_meet">"Meet "</strings>
+    <strings name="task_suggest_send">"Send "</strings>
+    <strings name="task_suggest_pay">"Pay "</strings>
+    <strings name="task_suggest_read">"Read "</strings>
+    <strings name="task_suggest_study">"Study "</strings>
+    <strings name="task_suggest_visit">Visit </strings>
+    <strings name="task_suggest_get">"Get "</strings>
+    <strings name="task_suggest_pick">"Pick "</strings>
+    <strings name="task_suggest_take">"Take "</strings>
+    <strings name="task_suggest_make">"Make "</strings>
+    <strings name="task_suggest_finish">"Finish "</strings>
+    <strings name="task_suggest_do">"Do "</strings>
+    <strings name="general_mark_as_done">Mark As Done</strings>
 </resources>

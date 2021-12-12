@@ -48,7 +48,7 @@ public class XmlParserReader {
     public Resources fromXml() {
         try {
 
-            File file = new File("C:/Users/hp/projects/Google-Translate-Script/output.xml");
+            File file = new File("/Users/samuelowino/Documents/projects/Google-Translate-Script/output.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Resources.class);
 
             Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
