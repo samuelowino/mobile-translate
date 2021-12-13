@@ -6,7 +6,7 @@
 * And general xml files processing.
 
 ## How to run the code
-* Close the project
+* Clone the project
 ```shell
 $ git clone https://github.com/samuelowino/Google-Translate-Script
 
@@ -62,4 +62,4 @@ To obtain an API KEY got to
 ```shell
 https://console.cloud.google.com/apis/credentials?project=[your-google-cloud-project]
 ```
-- Pick one of the available service accounts keys or creating a new one. In that case while selecting key choose JSON so that you can down the JSON file used above.
+- Pick one of the available service accounts keys or creat a new one. In that case while selecting key choose JSON so that you can down the JSON file used above.
