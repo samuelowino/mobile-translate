@@ -62,4 +62,17 @@ To obtain an API KEY got to
 ```shell
 https://console.cloud.google.com/apis/credentials?project=[your-google-cloud-project]
 ```
-- Pick one of the available service accounts keys or creat a new one. In that case while selecting key choose JSON so that you can down the JSON file used above.
+- Pick one of the available service accounts keys or create a new one.
+- In that case while selecting key choose JSON so that you can down the JSON file used above.
+
+## Run Translation
+
+- Add your strings to the output.xml file.
+- Update <string> tags to <strings> 
+- Execute the script while you go fetch some coffee, it takes some time.
+```shell
+$ cd target
+$ java -jar Google-Translate-Labs-1.0-SNAPSHOT-jar-with-dependencies.jar 
+```
+
+The project will generate localised content and place them in the project/target directory, in the format of [locale].xml e.g de.xml or zh.xml.
