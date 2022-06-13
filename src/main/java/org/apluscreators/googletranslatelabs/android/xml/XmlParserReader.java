@@ -1,13 +1,13 @@
-package org.apluscreators.googletranslatelabs.xml;
+package org.apluscreators.googletranslatelabs.android.xml;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.apluscreators.googletranslatelabs.model.String;
-import org.apluscreators.googletranslatelabs.model.Resources;
-import org.apluscreators.googletranslatelabs.translate.GoogleTranslateFactory;
+import org.apluscreators.googletranslatelabs.android.model.String;
+import org.apluscreators.googletranslatelabs.android.model.Resources;
+import org.apluscreators.googletranslatelabs.android.translate.GoogleTranslateFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;

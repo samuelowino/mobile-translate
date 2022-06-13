@@ -1,7 +1,7 @@
 package org.apluscreators.googletranslatelabs;
 
 
-import org.apluscreators.googletranslatelabs.xml.XmlParserReader;
+import org.apluscreators.googletranslatelabs.android.xml.XmlParserReader;
 
 import java.util.Arrays;
 import java.util.HashSet;

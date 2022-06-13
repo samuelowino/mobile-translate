@@ -1,4 +1,4 @@
-package org.apluscreators.googletranslatelabs.model;
+package org.apluscreators.googletranslatelabs.android.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
