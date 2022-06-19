@@ -3,7 +3,9 @@ package com.owino.mobiletranslate.ios.translate;
 import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 import com.owino.mobiletranslate.ios.translate.impl.LocalizableFileProcessorImpl;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import javax.annotation.PreDestroy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -20,9 +22,9 @@ class LocalizableFileProcessorTest {
     @BeforeEach
     void setUp() {
         localizableFileProcessor = new LocalizableFileProcessorImpl();
-        var urlResource =  ClassLoader.getSystemClassLoader().getResource("localizable-test.strings");
+        var urlResource = ClassLoader.getSystemClassLoader().getResource("localizable-test.strings");
         var fileUrl = urlResource.getFile();
-        testLocalizableFile =  new File(fileUrl);
+        testLocalizableFile = new File(fileUrl);
 
         assertThat(testLocalizableFile).isNotNull();
         assertThat(Files.exists(testLocalizableFile.toPath())).isTrue();

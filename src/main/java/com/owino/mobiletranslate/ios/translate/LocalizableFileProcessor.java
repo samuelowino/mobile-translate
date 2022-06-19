@@ -1,6 +1,7 @@
 package com.owino.mobiletranslate.ios.translate;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import com.owino.mobiletranslate.ios.model.LocalizableTable;
 
@@ -41,4 +42,20 @@ public interface LocalizableFileProcessor {
      * @return List of translated localizables
      */
     List<LocalizableTable> translateLocalizableTable(List<LocalizableTable> originalLocalizableValues, String locale);
+
+    /**
+     * Writes translations to a file {file.strings} and then places the file in specified directory
+     *
+     * @param translatedLocalizable List
+     * @param locale String en, fr
+     */
+    void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable,  String locale) throws IOException;
+
+    /**
+     * Create a destination file for the translated contents
+     *
+     * @param localeSymbol String such en, fr
+     * @return File lo-localizable.string
+     */
+    File generateLocalizableDestinationFile(String localeSymbol);
 }

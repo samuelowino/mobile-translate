@@ -4,7 +4,9 @@ import com.owino.mobiletranslate.common.RunnerInputReader;
 import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 import com.owino.mobiletranslate.ios.model.LocalizableTable;
 import com.owino.mobiletranslate.ios.translate.LocalizableFileProcessor;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -67,5 +69,22 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
             translatedLocalizableTable.add(unTranslatedTable);
         }
         return translatedLocalizableTable;
+    }
+
+    @Override
+    public void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable, String locale) throws IOException {
+        LOGGER.info("Writing translated content to file| estimated size " + translatedLocalizable.size());
+        var destinationFile = generateLocalizableDestinationFile(locale);
+        if (!Files.exists(destinationFile.toPath())) throw new AssertionError("Invalid destination file " + destinationFile);
+        for (LocalizableTable localizableTable : translatedLocalizable) {
+            var writer = new BufferedWriter(new FileWriter(destinationFile, true));
+            writer.append("\n".concat(localizableTable.getKey()).concat( " = ").concat(localizableTable.getTranslatableResource()));
+            writer.close();
+        }
+    }
+
+    @Override
+    public File generateLocalizableDestinationFile(String localeSymbol) {
+        return new File(localeSymbol.concat(".lproj").concat("/").concat("Localizable.strings"));
     }
 }
