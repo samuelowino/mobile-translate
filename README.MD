@@ -81,3 +81,5 @@ $ ./mobile-translate.sh
 ```
 
 The project will generate localised content and place them in the project/target directory, in the format of [locale].xml e.g de.xml or zh.xml.
+
+> Note: Test execution requires that you set the Google Cloud credentials as described above

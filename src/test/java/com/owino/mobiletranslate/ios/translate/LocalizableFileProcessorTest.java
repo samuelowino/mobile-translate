@@ -1,10 +1,13 @@
 package com.owino.mobiletranslate.ios.translate;
 
+import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 import com.owino.mobiletranslate.ios.translate.impl.LocalizableFileProcessorImpl;
 import java.io.File;
 import java.nio.file.Files;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,6 +15,7 @@ class LocalizableFileProcessorTest {
 
     private LocalizableFileProcessor localizableFileProcessor;
     private File testLocalizableFile;
+
 
     @BeforeEach
     void setUp() {
@@ -62,6 +66,30 @@ class LocalizableFileProcessorTest {
     }
 
     @Test
-    void translateLocalizableTable() {
+    void shouldTranslateLocalizableTableTest() {
+        GoogleTranslator translator = Mockito.mock(GoogleTranslator.class);
+
+        Mockito.when(translator.getTranslatedText(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+                .thenReturn("こんにちはあなたの人生を整理します");
+
+        var localeTables = localizableFileProcessor.extractLocalizableTableFromFile(testLocalizableFile);
+
+        var translatedTable = localizableFileProcessor.translateLocalizableTable(localeTables, "ja");
+
+        assertThat(localeTables).isNotEmpty();
+        assertThat(localeTables.size()).isEqualTo(9);
+        assertThat(localeTables.get(0)).isNotNull();
+        assertThat(localeTables.get(0).getKey()).isNotEmpty();
+        assertThat(localeTables.get(0).getKey()).isNotNull();
+        assertThat(localeTables.get(0).getTranslatableResource()).isNotNull();
+        assertThat(localeTables.get(0).getTranslatableResource()).isNotEmpty();
+        assertThat(localeTables.get(0).getKey()).isNotEmpty();
+        assertThat(localeTables.get(0).getKey().contains(" ")).isFalse();
+        assertThat(localeTables.get(0).getTranslatableResource().contains(" ")).isFalse();
+        assertThat(localeTables.get(0).getKey().contains("\"")).isFalse();
+        assertThat(localeTables.get(0).getTranslatableResource().contains("\"")).isFalse();
+
+        System.out.println(translatedTable);
+
     }
 }
