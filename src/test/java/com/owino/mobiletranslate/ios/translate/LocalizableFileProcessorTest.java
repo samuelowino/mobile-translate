@@ -5,7 +5,6 @@ import com.owino.mobiletranslate.ios.translate.impl.LocalizableFileProcessorImpl
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import javax.annotation.PreDestroy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -93,5 +92,10 @@ class LocalizableFileProcessorTest {
 
         System.out.println(translatedTable);
 
+    }
+
+    @Test
+    void shouldGenerateLocalizableDestinationFileTest() throws IOException {
+        localizableFileProcessor.generateLocalizableDestinationFile(new File("rootDir"),"en");
     }
 }

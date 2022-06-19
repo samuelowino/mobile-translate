@@ -72,19 +72,32 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     }
 
     @Override
-    public void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable, String locale) throws IOException {
+    public void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable, String locale, File rootFilePath) throws IOException {
         LOGGER.info("Writing translated content to file| estimated size " + translatedLocalizable.size());
-        var destinationFile = generateLocalizableDestinationFile(locale);
-        if (!Files.exists(destinationFile.toPath())) throw new AssertionError("Invalid destination file " + destinationFile);
+        var destinationFile = generateLocalizableDestinationFile(rootFilePath, locale);
+        if (!Files.exists(destinationFile.toPath()))
+            throw new AssertionError("Invalid destination file " + destinationFile);
         for (LocalizableTable localizableTable : translatedLocalizable) {
             var writer = new BufferedWriter(new FileWriter(destinationFile, true));
-            writer.append("\n".concat(localizableTable.getKey()).concat( " = ").concat(localizableTable.getTranslatableResource()));
+            writer.append("\n".concat(localizableTable.getKey()).concat(" = ").concat(localizableTable.getTranslatableResource()));
             writer.close();
         }
     }
 
     @Override
-    public File generateLocalizableDestinationFile(String localeSymbol) {
-        return new File(localeSymbol.concat(".lproj").concat("/").concat("Localizable.strings"));
+    public File generateRootTranslationsOutputFolder() throws IOException {
+        var rootFilePath = RunnerInputReader.requestRootDestinationFolder();
+        var rootFolder = new File(rootFilePath.concat("/ios-localizable"));
+        var path = Files.createDirectory(rootFolder.toPath());
+        return path.toFile();
+    }
+
+    @Override
+    public File generateLocalizableDestinationFile(File rootFilePath, String localeSymbol) throws IOException {
+        var directory = new File(rootFilePath.getPath().concat("/" + localeSymbol).concat(".lproj"));
+        Files.createDirectory(directory.toPath());
+        var localizableFile = new File(directory + "/Localizable.strings");
+        var finalFilePath = Files.createFile(localizableFile.toPath());
+        return finalFilePath.toFile();
     }
 }

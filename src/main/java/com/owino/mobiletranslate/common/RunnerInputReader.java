@@ -13,7 +13,7 @@ public class RunnerInputReader {
     public static final Logger LOGGER = Logger.getLogger(TranslateApplication.class.getSimpleName());
 
     public static File getOutputFileFromPrompt() {
-        LOGGER.severe("Enter the output file directory for the translated text....");
+        LOGGER.severe("Enter the root file with pre-translation text....");
 
         var scanner = new Scanner(System.in);
         var filePath = scanner.nextLine();
@@ -61,5 +61,21 @@ public class RunnerInputReader {
             localizableFile = requestRootLocalizableFile();
         }
         return localizableFile;
+    }
+
+    public static String requestRootDestinationFolder() {
+        LOGGER.severe("Enter the folder path where you would like to us to store the final translated files...");
+
+        var folderPath = new Scanner(System.in).nextLine();
+
+        var localizableFolder = new File(folderPath);
+
+        if (Files.exists(localizableFolder.toPath(), LinkOption.NOFOLLOW_LINKS)){
+            return folderPath;
+        } else {
+            LOGGER.severe("This folder does not exist");
+            folderPath = requestRootDestinationFolder();
+        }
+        return folderPath;
     }
 }

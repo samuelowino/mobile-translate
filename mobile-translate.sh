@@ -1,1 +1,1 @@
-mvn clean install;cd target;java -jar mobile-translate-jar-with-dependencies.jar
+mvn clean install -DskipTests;cd target;java -jar mobile-translate-jar-with-dependencies.jar

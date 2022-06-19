@@ -5,10 +5,11 @@ import com.owino.mobiletranslate.common.LanguagesDirectory;
 import com.owino.mobiletranslate.common.RunnerInputReader;
 import com.owino.mobiletranslate.enums.TargetOS;
 import com.owino.mobiletranslate.ios.iOSTranslationProcessor;
+import java.io.IOException;
 
 public class TranslateApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         var targetOS = RunnerInputReader.getTargetOSFromUser();
 
@@ -19,7 +20,11 @@ public class TranslateApplication {
         if (targetOS == TargetOS.ANDROID) {
             new AndroidTranslationProcessor().runTranslation(outputFile, distinctLanguages);
         } else if (targetOS == TargetOS.IOS) {
-            new iOSTranslationProcessor().runTranslation(outputFile, distinctLanguages);
+            try {
+                new iOSTranslationProcessor().runTranslation(outputFile, distinctLanguages);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
