@@ -6,8 +6,11 @@ import com.owino.mobiletranslate.ios.model.LocalizableTable;
 import com.owino.mobiletranslate.ios.translate.LocalizableFileProcessor;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +38,6 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
         LOGGER.info("Obtaining localizable table from a line of localizable text\n==>" + textLineOfLocalizable);
         var components = textLineOfLocalizable.split("[=]");
         var updatedComponents = Arrays.stream(components)
-                .map(component -> component.replace('"', ' '))
                 .map(e -> e.replace(" ", ""))
                 .collect(Collectors.toList());
 
@@ -64,8 +66,8 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     public List<LocalizableTable> translateLocalizableTable(List<LocalizableTable> originalLocalizableValues, String locale) {
         List<LocalizableTable> translatedLocalizableTable = new ArrayList<>();
         for (LocalizableTable unTranslatedTable : originalLocalizableValues) {
-            var translatedResource = googleTranslator.getTranslatedText(unTranslatedTable.getTranslatableResource(), locale);
-            unTranslatedTable.setTranslatableResource(translatedResource);
+            var translatedBytes = googleTranslator.getTranslatedBytes(unTranslatedTable.getTranslatableResource(), locale);
+            unTranslatedTable.setTranslatableResource(new String(translatedBytes, StandardCharsets.UTF_16));
             translatedLocalizableTable.add(unTranslatedTable);
         }
         return translatedLocalizableTable;
@@ -78,7 +80,7 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
         if (!Files.exists(destinationFile.toPath()))
             throw new AssertionError("Invalid destination file " + destinationFile);
         for (LocalizableTable localizableTable : translatedLocalizable) {
-            var writer = new BufferedWriter(new FileWriter(destinationFile, true));
+            var writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destinationFile, true), StandardCharsets.UTF_16));
             writer.append("\n".concat(localizableTable.getKey()).concat(" = ").concat(localizableTable.getTranslatableResource()));
             writer.close();
         }

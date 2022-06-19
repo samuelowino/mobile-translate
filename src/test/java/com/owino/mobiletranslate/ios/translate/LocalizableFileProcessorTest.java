@@ -4,6 +4,7 @@ import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 import com.owino.mobiletranslate.ios.translate.impl.LocalizableFileProcessorImpl;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,8 +71,8 @@ class LocalizableFileProcessorTest {
     void shouldTranslateLocalizableTableTest() {
         GoogleTranslator translator = Mockito.mock(GoogleTranslator.class);
 
-        Mockito.when(translator.getTranslatedText(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn("こんにちはあなたの人生を整理します");
+        Mockito.when(translator.getTranslatedBytes(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+                .thenReturn("こんにちはあなたの人生を整理します".getBytes(StandardCharsets.UTF_16));
 
         var localeTables = localizableFileProcessor.extractLocalizableTableFromFile(testLocalizableFile);
 

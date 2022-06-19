@@ -3,6 +3,7 @@ package com.owino.mobiletranslate.android.translate;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.android.model.String;
 import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
+import java.nio.charset.StandardCharsets;
 
 public class AndroidTranslateFactory {
 
@@ -31,7 +32,7 @@ public class AndroidTranslateFactory {
 
             java.lang.String name = strings[i].getName();
             java.lang.String untranslatedContent = strings[i].getContent();
-            java.lang.String translatedContent = translator.getTranslatedText(untranslatedContent, targetLanguage);
+            java.lang.String translatedContent = new java.lang.String(translator.getTranslatedBytes(untranslatedContent, targetLanguage), StandardCharsets.UTF_16);
 
             //todo translate
 
