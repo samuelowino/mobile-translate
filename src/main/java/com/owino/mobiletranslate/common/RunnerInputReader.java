@@ -12,14 +12,14 @@ public class RunnerInputReader {
 
     public static final Logger LOGGER = Logger.getLogger(TranslateApplication.class.getSimpleName());
 
-    public static File getOutputFileFromPrompt(){
+    public static File getOutputFileFromPrompt() {
         LOGGER.severe("Enter the output file directory for the translated text....");
 
         var scanner = new Scanner(System.in);
         var filePath = scanner.nextLine();
         var outputFile = new File(filePath);
 
-        boolean fileExists = Files.exists(outputFile.toPath(), new LinkOption[]{LinkOption.NOFOLLOW_LINKS});
+        boolean fileExists = Files.exists(outputFile.toPath(), LinkOption.NOFOLLOW_LINKS);
 
         if (!fileExists) {
             LOGGER.severe("This output file does not exist");
@@ -38,7 +38,7 @@ public class RunnerInputReader {
 
         var option = scanner.nextLine();
 
-        switch (option){
+        switch (option) {
             case "A":
                 return TargetOS.ANDROID;
             case "I":
@@ -46,5 +46,20 @@ public class RunnerInputReader {
             default:
                 throw new AssertionError("Invalid OS option " + option);
         }
+    }
+
+    public static File requestRootLocalizableFile() {
+        LOGGER.severe("Enter path to root localizable file...");
+
+        var filePath = new Scanner(System.in).nextLine();
+        var localizableFile = new File(filePath);
+
+        if (Files.exists(localizableFile.toPath(), LinkOption.NOFOLLOW_LINKS)){
+            return localizableFile;
+        } else {
+            LOGGER.severe("This localizable file does not exist");
+            localizableFile = requestRootLocalizableFile();
+        }
+        return localizableFile;
     }
 }

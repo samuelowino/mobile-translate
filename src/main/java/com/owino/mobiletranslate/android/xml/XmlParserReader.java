@@ -11,7 +11,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.android.model.String;
-import com.owino.mobiletranslate.android.translate.GoogleTranslateFactory;
+import com.owino.mobiletranslate.android.translate.AndroidTranslateFactory;
 
 public class XmlParserReader {
 
@@ -25,7 +25,7 @@ public class XmlParserReader {
 
             Resources untranslatedResources = fromXml(outputFile);
 
-            GoogleTranslateFactory translateFactory = new GoogleTranslateFactory(untranslatedResources);
+            AndroidTranslateFactory translateFactory = new AndroidTranslateFactory(untranslatedResources);
             Resources translatedResources = translateFactory.getTranslatedResources(targetLanguage);
 
             for (String string : translatedResources.getStrings()) {
@@ -57,7 +57,7 @@ public class XmlParserReader {
             Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
             Resources resources = (Resources) jaxbContextUnmarshaller.unmarshal(outputFile);
 
-            System.out.println("Resources | " + resources);
+            LOGGER.info("Resources | " + resources);
 
             return resources;
 
@@ -67,15 +67,5 @@ public class XmlParserReader {
             return null;
         }
     }
-
-    private String[] getContentEntries() {
-        String[] contentEntries = {
-                new String("app_name", "app-name"),
-
-        };
-
-        return contentEntries;
-    }
-
 
 }

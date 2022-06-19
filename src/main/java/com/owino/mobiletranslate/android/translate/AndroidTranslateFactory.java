@@ -1,21 +1,19 @@
 package com.owino.mobiletranslate.android.translate;
 
-import com.google.cloud.translate.Translate;
-import com.google.cloud.translate.Translate.TranslateOption;
-import com.google.cloud.translate.TranslateOptions;
-import com.google.cloud.translate.Translation;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.android.model.String;
+import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 
-public class GoogleTranslateFactory {
+public class AndroidTranslateFactory {
 
-    Translate translateClient;
-    Resources resources;
+    private Resources resources;
+    private GoogleTranslator translator;
 
-    public GoogleTranslateFactory(Resources resources) {
-        translateClient = TranslateOptions.getDefaultInstance().getService();
+    public AndroidTranslateFactory(Resources resources) {
         this.resources = resources;
+        this.translator = new GoogleTranslator();
     }
+
 
     public Resources getTranslatedResources(java.lang.String targetLanguage) {
         return translateResources(targetLanguage);
@@ -33,7 +31,7 @@ public class GoogleTranslateFactory {
 
             java.lang.String name = strings[i].getName();
             java.lang.String untranslatedContent = strings[i].getContent();
-            java.lang.String translatedContent = getTranslatedText(untranslatedContent, targetLanguage);
+            java.lang.String translatedContent = translator.getTranslatedText(untranslatedContent, targetLanguage);
 
             //todo translate
 
@@ -47,22 +45,6 @@ public class GoogleTranslateFactory {
 
         return translatedResources;
 
-    }
-
-    private java.lang.String getTranslatedText(java.lang.String originalText, java.lang.String targetLanguage) {
-
-        Translation translation =
-                translateClient.translate(
-                        originalText,
-                        TranslateOption.sourceLanguage("en"),
-                        TranslateOption.targetLanguage(targetLanguage));
-
-        java.lang.String translatedText = translation.getTranslatedText();
-
-        System.out.printf("Text: %s%n", originalText);
-        System.out.printf("Translation: %s%n", translatedText);
-
-        return translatedText;
     }
 
 }
