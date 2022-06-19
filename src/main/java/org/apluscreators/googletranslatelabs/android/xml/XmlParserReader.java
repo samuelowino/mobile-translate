@@ -1,32 +1,39 @@
 package org.apluscreators.googletranslatelabs.android.xml;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.List;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import org.apluscreators.googletranslatelabs.android.model.String;
 import org.apluscreators.googletranslatelabs.android.model.Resources;
+import org.apluscreators.googletranslatelabs.android.model.String;
 import org.apluscreators.googletranslatelabs.android.translate.GoogleTranslateFactory;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 public class XmlParserReader {
 
-    public void executeXmlAndTranslationParser(java.lang.String targetLanguage) {
+    private static final Logger LOGGER = Logger.getLogger(XmlParserReader.class.getSimpleName());
 
-       Resources untranslatedResources = fromXml();
+    public void executeXmlAndTranslationParser(File outputFile, List<java.lang.String> targetLanguages) {
 
-        GoogleTranslateFactory translateFactory = new GoogleTranslateFactory(untranslatedResources);
-        Resources translatedResources = translateFactory.getTranslatedResources(targetLanguage);
+        LOGGER.info("Translating " + targetLanguages.size() + " locales to target output file " + outputFile.getAbsolutePath());
 
-        for (String string : translatedResources.getStrings()) {
-            System.out.println(string);
+        for (java.lang.String targetLanguage : targetLanguages) {
+
+            Resources untranslatedResources = fromXml(outputFile);
+
+            GoogleTranslateFactory translateFactory = new GoogleTranslateFactory(untranslatedResources);
+            Resources translatedResources = translateFactory.getTranslatedResources(targetLanguage);
+
+            for (String string : translatedResources.getStrings()) {
+                LOGGER.info(string.toString());
+            }
+
+            toXml(translatedResources,targetLanguage + ".xml");
         }
-
-        toXml(translatedResources,targetLanguage + ".xml");
     }
 
 
@@ -36,23 +43,19 @@ public class XmlParserReader {
             Marshaller marshallerObj = contextObj.createMarshaller();
             marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshallerObj.marshal(contentRoot, new FileOutputStream(outputFileName));
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }
 
     }
 
-    public Resources fromXml() {
+    public Resources fromXml(File outputFile) {
         try {
 
-            File file = new File("/Users/samuelowino/Documents/projects/Google-Translate-Script/output.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Resources.class);
 
             Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
-            Resources resources = (Resources) jaxbContextUnmarshaller.unmarshal(file);
+            Resources resources = (Resources) jaxbContextUnmarshaller.unmarshal(outputFile);
 
             System.out.println("Resources | " + resources);
 

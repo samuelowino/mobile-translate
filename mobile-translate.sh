@@ -1,0 +1,1 @@
+mvn clean install;cd target;java -jar mobile-translate-jar-with-dependencies.jar
