@@ -1,12 +1,12 @@
-package org.apluscreators.googletranslatelabs.common;
+package com.owino.mobiletranslate.common;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.util.Scanner;
 import java.util.logging.Logger;
-import org.apluscreators.googletranslatelabs.TranslateApplication;
-import org.apluscreators.googletranslatelabs.enums.TargetOS;
+import com.owino.mobiletranslate.TranslateApplication;
+import com.owino.mobiletranslate.enums.TargetOS;
 
 public class RunnerInputReader {
 

@@ -1,10 +1,10 @@
-package org.apluscreators.googletranslatelabs.common;
+package com.owino.mobiletranslate.common;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import org.apluscreators.googletranslatelabs.TranslateApplication;
+import com.owino.mobiletranslate.TranslateApplication;
 
 public class LanguagesDirectory {
 

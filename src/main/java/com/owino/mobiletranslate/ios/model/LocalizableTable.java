@@ -1,4 +1,4 @@
-package org.apluscreators.googletranslatelabs.ios.model;
+package com.owino.mobiletranslate.ios.model;
 
 public class LocalizableTable {
     private String key;

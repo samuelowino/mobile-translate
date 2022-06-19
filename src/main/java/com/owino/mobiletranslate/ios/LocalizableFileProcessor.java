@@ -1,8 +1,8 @@
-package org.apluscreators.googletranslatelabs.ios;
+package com.owino.mobiletranslate.ios;
 
 import java.io.File;
 import java.util.List;
-import org.apluscreators.googletranslatelabs.ios.model.LocalizableTable;
+import com.owino.mobiletranslate.ios.model.LocalizableTable;
 
 public interface LocalizableFileProcessor {
     /**

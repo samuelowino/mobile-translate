@@ -1,11 +1,11 @@
-package org.apluscreators.googletranslatelabs.android.translate;
+package com.owino.mobiletranslate.android.translate;
 
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
-import org.apluscreators.googletranslatelabs.android.model.Resources;
-import org.apluscreators.googletranslatelabs.android.model.String;
+import com.owino.mobiletranslate.android.model.Resources;
+import com.owino.mobiletranslate.android.model.String;
 
 public class GoogleTranslateFactory {
 
@@ -26,7 +26,7 @@ public class GoogleTranslateFactory {
         Resources translatedResources = new Resources();
         String[] translatedStringsArray = new String[resources.getStrings().length];
 
-        org.apluscreators.googletranslatelabs.android.model.String[] strings = resources.getStrings();
+        com.owino.mobiletranslate.android.model.String[] strings = resources.getStrings();
 
         for (int i = 0; i < strings.length; i++) {
             String translatedStringEntry = new String();

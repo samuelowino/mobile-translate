@@ -1,10 +1,10 @@
-package org.apluscreators.googletranslatelabs;
+package com.owino.mobiletranslate;
 
-import org.apluscreators.googletranslatelabs.android.AndroidTranslationProcessor;
-import org.apluscreators.googletranslatelabs.common.LanguagesDirectory;
-import org.apluscreators.googletranslatelabs.common.RunnerInputReader;
-import org.apluscreators.googletranslatelabs.enums.TargetOS;
-import org.apluscreators.googletranslatelabs.ios.iOSTranslationProcessor;
+import com.owino.mobiletranslate.android.AndroidTranslationProcessor;
+import com.owino.mobiletranslate.common.LanguagesDirectory;
+import com.owino.mobiletranslate.common.RunnerInputReader;
+import com.owino.mobiletranslate.enums.TargetOS;
+import com.owino.mobiletranslate.ios.iOSTranslationProcessor;
 
 public class TranslateApplication {
 

@@ -1,4 +1,4 @@
-package org.apluscreators.googletranslatelabs.android.xml;
+package com.owino.mobiletranslate.android.xml;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,9 +9,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import org.apluscreators.googletranslatelabs.android.model.Resources;
-import org.apluscreators.googletranslatelabs.android.model.String;
-import org.apluscreators.googletranslatelabs.android.translate.GoogleTranslateFactory;
+import com.owino.mobiletranslate.android.model.Resources;
+import com.owino.mobiletranslate.android.model.String;
+import com.owino.mobiletranslate.android.translate.GoogleTranslateFactory;
 
 public class XmlParserReader {
 

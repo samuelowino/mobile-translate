@@ -1,4 +1,4 @@
-package org.apluscreators.googletranslatelabs.android.model;
+package com.owino.mobiletranslate.android.model;
 
 
 import javax.xml.bind.annotation.XmlAttribute;

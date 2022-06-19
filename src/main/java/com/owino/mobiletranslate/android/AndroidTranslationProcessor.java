@@ -1,9 +1,9 @@
-package org.apluscreators.googletranslatelabs.android;
+package com.owino.mobiletranslate.android;
 
 import java.io.File;
 import java.util.List;
-import org.apluscreators.googletranslatelabs.android.xml.XmlParserReader;
-import org.apluscreators.googletranslatelabs.common.TranslationProcessor;
+import com.owino.mobiletranslate.android.xml.XmlParserReader;
+import com.owino.mobiletranslate.common.TranslationProcessor;
 
 public class AndroidTranslationProcessor implements TranslationProcessor {
     public void runTranslation(File outputFile, List<String> targetLanguages){

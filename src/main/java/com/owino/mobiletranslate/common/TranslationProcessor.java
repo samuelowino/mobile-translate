@@ -1,4 +1,4 @@
-package org.apluscreators.googletranslatelabs.common;
+package com.owino.mobiletranslate.common;
 
 import java.io.File;
 import java.util.List;
