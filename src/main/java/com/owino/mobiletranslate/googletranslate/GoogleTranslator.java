@@ -26,8 +26,12 @@ public class GoogleTranslator {
 
         var translatedBytes = translation.getTranslatedText().getBytes(StandardCharsets.UTF_16);
 
+        var translatedString = new String(translatedBytes, StandardCharsets.UTF_16).replace("&quot;", "\"");
+
+        translatedBytes = translatedString.getBytes(StandardCharsets.UTF_16);
+
         LOGGER.info(String.format(Locale.getDefault(),"Text: %s%n", originalText));
-        LOGGER.info(String.format("Translation: %s%n", new String(translatedBytes, StandardCharsets.UTF_16)));
+        LOGGER.info(String.format("Translation: %s%n", translatedString));
 
         return translatedBytes;
     }
