@@ -37,13 +37,10 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     public LocalizableTable getLocalizableTableFromString(String textLineOfLocalizable) {
         LOGGER.info("Obtaining localizable table from a line of localizable text\n==>" + textLineOfLocalizable);
         var components = textLineOfLocalizable.split("[=]");
-        var updatedComponents = Arrays.stream(components)
-                .map(e -> e.replace(" ", ""))
-                .collect(Collectors.toList());
 
-        updatedComponents.forEach(System.out::println);
+        Arrays.stream(components).forEach(System.out::println);
 
-        return new LocalizableTable(updatedComponents.get(0), updatedComponents.get(1));
+        return new LocalizableTable(components[0], components[1]);
     }
 
     @Override
