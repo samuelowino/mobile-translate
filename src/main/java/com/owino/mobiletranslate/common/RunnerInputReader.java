@@ -64,7 +64,7 @@ public class RunnerInputReader {
     }
 
     public static String requestRootDestinationFolder() {
-        LOGGER.severe("Enter the folder path where you would like to us to store the final translated files...");
+        LOGGER.severe("Enter the folder path where you would like us to store the final translated files...");
 
         var folderPath = new Scanner(System.in).nextLine();
 
