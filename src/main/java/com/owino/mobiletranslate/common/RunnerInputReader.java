@@ -1,5 +1,6 @@
 package com.owino.mobiletranslate.common;
 
+import com.owino.mobiletranslate.enums.Workflow;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -77,5 +78,37 @@ public class RunnerInputReader {
             folderPath = requestRootDestinationFolder();
         }
         return folderPath;
+    }
+
+    public static File requestLocalizableFileForValidation(){
+        LOGGER.severe("Enter path to localizable file...");
+
+        var filePath = new Scanner(System.in).nextLine();
+        var localizableFile = new File(filePath);
+
+        if (Files.exists(localizableFile.toPath(), LinkOption.NOFOLLOW_LINKS)){
+            return localizableFile;
+        } else {
+            LOGGER.severe("This localizable file does not exist");
+            localizableFile = requestLocalizableFileForValidation();
+        }
+
+        return localizableFile;
+    }
+
+    public static Workflow getWorkflowFromUser() {
+        LOGGER.severe("Which workflow would you like to run? type in (L) for Translation or (V) for localized syntax analysis...");
+        var scanner = new Scanner(System.in);
+
+        var option = scanner.nextLine();
+
+        switch (option) {
+            case "L":
+                return Workflow.TRANSLATION;
+            case "V":
+                return Workflow.VALIDATION;
+            default:
+                throw new AssertionError("Invalid option " + option);
+        }
     }
 }

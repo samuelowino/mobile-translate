@@ -45,7 +45,7 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     @Override
     public List<LocalizableTable> extractLocalizableTableFromFile(File localizableFile) {
         try {
-            return Files.lines(localizableFile.toPath())
+            return Files.lines(localizableFile.toPath(), StandardCharsets.UTF_16)
                     .map(this::getLocalizableTableFromString)
                     .collect(Collectors.toList());
         } catch (IOException e) {
