@@ -1,8 +1,10 @@
-## Google Translate Automation App
+## Google Translate Automation CLI-Program
 > Manual translation sucks also why pay $$ for stuff you can automate.
 > This project is based on;
 * Google Cloud Platform Translate Api
 * JAX-B XML Processing
+* Apple's Localizable standard
+* Android String Resources
 * And general xml files processing.
 
 ## How to run the code
