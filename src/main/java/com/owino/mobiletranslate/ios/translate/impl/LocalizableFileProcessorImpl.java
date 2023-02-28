@@ -4,6 +4,8 @@ import com.owino.mobiletranslate.common.RunnerInputReader;
 import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 import com.owino.mobiletranslate.ios.model.LocalizableTable;
 import com.owino.mobiletranslate.ios.translate.LocalizableFileProcessor;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,9 +20,9 @@ import java.util.Locale;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
 
-    public static final Logger LOGGER = Logger.getLogger(LocalizableFileProcessorImpl.class.getSimpleName());
     private GoogleTranslator googleTranslator;
 
     public LocalizableFileProcessorImpl() {
@@ -34,7 +36,7 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
 
     @Override
     public LocalizableTable getLocalizableTableFromString(String textLineOfLocalizable) {
-        LOGGER.info("Obtaining localizable table from a line of localizable text\n==>" + textLineOfLocalizable);
+        log.info("Obtaining localizable table from a line of localizable text\n==>" + textLineOfLocalizable);
         var components = textLineOfLocalizable.split("[=]");
 
         Arrays.stream(components).forEach(System.out::println);
@@ -49,7 +51,7 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
                     .map(this::getLocalizableTableFromString)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            LOGGER.severe(String.format(Locale.getDefault(), "%s \n%s \n%s \n%s",
+            log.info(String.format(Locale.getDefault(), "%s \n%s \n%s \n%s",
                     "Failed to read localizable file content",
                     localizableFile.getAbsolutePath(),
                     "Cause:",
@@ -71,7 +73,7 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
 
     @Override
     public void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable, String locale, File rootFilePath) throws IOException {
-        LOGGER.info("Writing translated content to file| estimated size " + translatedLocalizable.size());
+        log.info("Writing translated content to file| estimated size " + translatedLocalizable.size());
         var destinationFile = generateLocalizableDestinationFile(rootFilePath, locale);
         if (!Files.exists(destinationFile.toPath()))
             throw new AssertionError("Invalid destination file " + destinationFile);

@@ -12,14 +12,16 @@ import javax.xml.bind.Unmarshaller;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.android.model.String;
 import com.owino.mobiletranslate.android.translate.AndroidTranslateFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class XmlParserReader {
 
     private static final Logger LOGGER = Logger.getLogger(XmlParserReader.class.getSimpleName());
 
     public void executeXmlAndTranslationParser(File outputFile, List<java.lang.String> targetLanguages) {
 
-        LOGGER.info("Translating " + targetLanguages.size() + " locales to target output file " + outputFile.getAbsolutePath());
+        log.info("Translating " + targetLanguages.size() + " locales to target output file " + outputFile.getAbsolutePath());
 
         for (java.lang.String targetLanguage : targetLanguages) {
 
@@ -29,7 +31,7 @@ public class XmlParserReader {
             Resources translatedResources = translateFactory.getTranslatedResources(targetLanguage);
 
             for (String string : translatedResources.getStrings()) {
-                LOGGER.info(string.toString());
+                log.info(string.toString());
             }
 
             toXml(translatedResources,targetLanguage + ".xml");
@@ -57,7 +59,7 @@ public class XmlParserReader {
             Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
             Resources resources = (Resources) jaxbContextUnmarshaller.unmarshal(outputFile);
 
-            LOGGER.info("Resources | " + resources);
+            log.info("Resources | " + resources);
 
             return resources;
 

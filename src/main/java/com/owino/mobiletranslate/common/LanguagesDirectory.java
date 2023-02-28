@@ -1,14 +1,13 @@
 package com.owino.mobiletranslate.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import com.owino.mobiletranslate.TranslateApplication;
 
+@Slf4j
 public class LanguagesDirectory {
-
-    public static final Logger LOGGER = Logger.getLogger(TranslateApplication.class.getSimpleName());
 
      private final List<String> languages = Arrays.asList(
              "ha", "pl", "am", "ar", "az", "be", "bg", "bn", "bs", "fr", "ga",
@@ -24,7 +23,7 @@ public class LanguagesDirectory {
 
     public List<String> findUniqueListOfLocales() {
 
-        LOGGER.info("Cleaning up locales list...");
+        log.info("Cleaning up locales list...");
 
         return languages.stream()
                 .distinct()

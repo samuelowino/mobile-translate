@@ -3,13 +3,14 @@ package com.owino.mobiletranslate.googletranslate;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import lombok.extern.slf4j.Slf4j;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+@Slf4j
 public class GoogleTranslator {
-
-    public static final Logger LOGGER = Logger.getLogger(GoogleTranslator.class.getSimpleName());
 
     private Translate translateClient;
 
@@ -30,8 +31,8 @@ public class GoogleTranslator {
 
         translatedBytes = translatedString.getBytes(StandardCharsets.UTF_16);
 
-        LOGGER.info(String.format(Locale.getDefault(),"Text: %s%n", originalText));
-        LOGGER.info(String.format("Translation: %s%n", translatedString));
+        log.info(String.format(Locale.getDefault(),"Text: %s%n", originalText));
+        log.info(String.format("Translation: %s%n", translatedString));
 
         return translatedBytes;
     }
