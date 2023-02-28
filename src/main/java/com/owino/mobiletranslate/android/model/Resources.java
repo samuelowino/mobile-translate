@@ -1,8 +1,11 @@
 package com.owino.mobiletranslate.android.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Arrays;
 
 @XmlRootElement
 public class Resources {
@@ -20,9 +23,12 @@ public class Resources {
 
     @Override
     public java.lang.String toString() {
-        return "Resources{" +
-                "strings=" + Arrays.toString(strings) +
-                '}';
+        try {
+            var objectMapper = new ObjectMapper();
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(strings);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

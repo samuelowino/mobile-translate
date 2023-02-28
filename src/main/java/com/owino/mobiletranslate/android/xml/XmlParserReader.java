@@ -59,7 +59,7 @@ public class XmlParserReader {
             Unmarshaller jaxbContextUnmarshaller = jaxbContext.createUnmarshaller();
             Resources resources = (Resources) jaxbContextUnmarshaller.unmarshal(outputFile);
 
-            log.info("Resources | " + resources);
+            log.info("Resources\n" + resources);
 
             return resources;
 
