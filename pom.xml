@@ -80,14 +80,24 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.guicedee.services</groupId>
-            <artifactId>sl4j</artifactId>
-            <version>1.0.13.5</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.7</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>mobile-translate</finalName>
+        <finalName>translate</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

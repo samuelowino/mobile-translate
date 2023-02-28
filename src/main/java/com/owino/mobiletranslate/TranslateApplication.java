@@ -13,7 +13,6 @@ public class TranslateApplication {
 
     public static void main(String[] args) throws IOException {
 
-
         var workflow = RunnerInputReader.getWorkflowFromUser();
 
         if (workflow == Workflow.TRANSLATION){
