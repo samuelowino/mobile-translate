@@ -6,3 +6,4 @@ credentials/
 output.xml
 target/
 /target
+*.log
