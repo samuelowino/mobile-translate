@@ -1,11 +1,13 @@
 package com.owino.mobiletranslate.common;
 
 import com.owino.mobiletranslate.enums.Workflow;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.util.Scanner;
 import java.util.logging.Logger;
+
 import com.owino.mobiletranslate.TranslateApplication;
 import com.owino.mobiletranslate.enums.TargetOS;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +57,7 @@ public class RunnerInputReader {
         var filePath = new Scanner(System.in).nextLine();
         var localizableFile = new File(filePath);
 
-        if (Files.exists(localizableFile.toPath(), LinkOption.NOFOLLOW_LINKS)){
+        if (Files.exists(localizableFile.toPath(), LinkOption.NOFOLLOW_LINKS)) {
             return localizableFile;
         } else {
             log.info("This localizable file does not exist");
@@ -71,7 +73,7 @@ public class RunnerInputReader {
 
         var localizableFolder = new File(folderPath);
 
-        if (Files.exists(localizableFolder.toPath(), LinkOption.NOFOLLOW_LINKS)){
+        if (Files.exists(localizableFolder.toPath(), LinkOption.NOFOLLOW_LINKS)) {
             return folderPath;
         } else {
             log.info("This folder does not exist");
@@ -80,13 +82,13 @@ public class RunnerInputReader {
         return folderPath;
     }
 
-    public static File requestLocalizableFileForValidation(){
+    public static File requestLocalizableFileForValidation() {
         log.info("Enter path to localizable file...");
 
         var filePath = new Scanner(System.in).nextLine();
         var localizableFile = new File(filePath);
 
-        if (Files.exists(localizableFile.toPath(), LinkOption.NOFOLLOW_LINKS)){
+        if (Files.exists(localizableFile.toPath(), LinkOption.NOFOLLOW_LINKS)) {
             return localizableFile;
         } else {
             log.info("This localizable file does not exist");
@@ -97,7 +99,7 @@ public class RunnerInputReader {
     }
 
     public static Workflow getWorkflowFromUser() {
-        log.info("Which workflow would you like to run? type in (L) for Translation or (V) for localized syntax analysis...");
+        log.info("Which workflow would you like to run? type in \n(L) for Translation\n(V) for localized syntax analysis\n(F) For Freighting localized Strings...");
         var scanner = new Scanner(System.in);
 
         var option = scanner.nextLine();
@@ -107,6 +109,8 @@ public class RunnerInputReader {
                 return Workflow.TRANSLATION;
             case "V":
                 return Workflow.VALIDATION;
+            case "F":
+                return Workflow.FREIGHT;
             default:
                 throw new AssertionError("Invalid option " + option);
         }
