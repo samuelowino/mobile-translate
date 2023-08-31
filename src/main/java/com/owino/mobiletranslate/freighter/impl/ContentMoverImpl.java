@@ -28,7 +28,7 @@ public class ContentMoverImpl implements ContentMover {
                 return Arrays.asList("ar-rAE", "ar-rBH", "ar-rDJ", "ar-rDZ", "ar-rEG", "ar-rEH",
                         "ar-rER", "ar-rIL", "ar-rIQ", "ar-rJO", "ar-rKM", "ar-rKW", "ar-rSA", "ar-rSD",
                         "ar-rSO", "ar-rSY", "ar-rTD", "ar-rLB", "ar-rLY", "ar-rMA", "ar-rMR", "ar-rOM",
-                        "ar-rPS", "ar-rQA", "ar-rSS", "ar-rTN");
+                        "ar-rPS", "ar-rQA", "ar-rSS", "ar-rTN", "ar-rYE");
             case "fil":
                 return Arrays.asList("b+fil", "fil-rPH");
             case "bg":
@@ -44,7 +44,7 @@ public class ContentMoverImpl implements ContentMover {
             case "es":
                 return Arrays.asList("es-rAR", "es-rBO", "es-rCL", "es-rCO", "es-rCR", "es-rCU", "es-rDO",
                         "es-rEC", "es-rES", "es-rGQ", "es-rGT", "es-rHN", "es-rMX", "es-rNI", "es-rPA", "es-rPE",
-                        "es-rPH", "es-rPR", "es-rPY", "es-rSV", "es-rUS", "es-rUY", "es-rVE");
+                        "es-rPH", "es-rPR", "es-rPY", "es-rSV", "es-rUS", "es-rUY", "es-rVE","es-rBR","es-rBZ", "de-rIT");
             case "fr":
                 return Arrays.asList("fr-rBE", "fr-rBF", "fr-rBI", "fr-rBJ",
                         "fr-rCA", "fr-rCD", "fr-rCF",
@@ -52,7 +52,7 @@ public class ContentMoverImpl implements ContentMover {
                         "fr-rGF", "fr-rGN", "fr-rGP", "fr-rGQ", "fr-rHT",
                         "fr-rLU", "fr-rMA", "fr-rMG","fr-rML", "fr-rMQ",
                         "fr-rNE", "fr-rPF", "fr-rSN", "fr-rTG",
-                        "fr-rKM", "fr-rTD");
+                        "fr-rKM", "fr-rTD", "fr-rMR", "fr-rCI");
             case "ga":
                 return Collections.singletonList("ga-rIE");
             case "hi":
@@ -66,7 +66,7 @@ public class ContentMoverImpl implements ContentMover {
             case "is":
                 return Collections.singletonList("is-rIS");
             case "it":
-                return Arrays.asList("it-rCH", "it-rIT", "it-rSM");
+                return Arrays.asList("it-rCH", "it-rIT", "it-rSM", "it-rVA");
             case "km":
                 return Collections.singletonList("km-rKH");
             case "kn":
@@ -112,7 +112,7 @@ public class ContentMoverImpl implements ContentMover {
             case "ur":
                 return Arrays.asList("ur-rIN", "ur-rPK");
             case "ms":
-                return Arrays.asList("ms-rBN", "ms-rMY", "ms-rSG");
+                return Arrays.asList("ms-rBN", "ms-rMY", "ms-rSG", "ms-rID");
             case "nb":
                 return Arrays.asList("nb-rNO", "nb-rSJ");
             case "sr":
