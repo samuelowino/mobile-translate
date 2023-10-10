@@ -7,3 +7,5 @@ output.xml
 target/
 /target
 *.log
+resources/files/
+strings.xml

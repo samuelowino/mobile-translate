@@ -3,8 +3,11 @@ package com.owino.mobiletranslate.freighter.impl;
 import com.owino.mobiletranslate.freighter.concept.ContentsExtractor;
 import com.owino.mobiletranslate.freighter.utils.IOUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +34,7 @@ public class ContentsExtractorImpl implements ContentsExtractor {
      * @return - String Contents
      */
     @Override
-    public Map<String, String> getFileContents(File sourceResourceFile, String language) throws IOException {
+    public Map<String, String> getFileContents(BufferedReader sourceResourceFile, String language) throws IOException {
         String contents = IOUtils.readFileContents(sourceResourceFile);
         HashMap<String, String> mapContents = new HashMap<>();
         mapContents.put(language, contents);
@@ -67,14 +70,14 @@ public class ContentsExtractorImpl implements ContentsExtractor {
      * @return - List of Files
      */
     @Override
-    public Map<String, File> getSourcesFiles() {
+    public Map<String, BufferedReader> getSourcesFiles() {
 //        return languages.stream().map(File::new)
 //                .collect(Collectors.toList()); //todo left this half way
-        Map<String, File> sourceFiles = new HashMap<>();
+        Map<String, BufferedReader> sourceFiles = new HashMap<>();
         for (String language : languages) {
-            String fileUrl = IOUtils.loadResourceFileUrl(language + ".xml").toExternalForm();
-            File resourceFile = new File(fileUrl);
-            sourceFiles.put(language, resourceFile);
+            var fileInputStream = IOUtils.loadResourceFileUrl(language + ".xml");
+            var bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            sourceFiles.put(language, bufferedReader);
         }
         return sourceFiles;
     }

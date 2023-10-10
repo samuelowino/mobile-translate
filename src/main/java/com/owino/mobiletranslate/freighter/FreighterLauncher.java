@@ -6,6 +6,7 @@ import com.owino.mobiletranslate.freighter.impl.ContentMoverImpl;
 import com.owino.mobiletranslate.freighter.impl.ContentsExtractorImpl;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -26,10 +27,10 @@ public class FreighterLauncher {
         }
 
         ContentsExtractor contentsExtractor = new ContentsExtractorImpl();
-        Map<String, File> sourceFiles = contentsExtractor.getSourcesFiles();
+        Map<String, BufferedReader> sourceFiles = contentsExtractor.getSourcesFiles();
 //        List<>sourceFiles.stream().map(contentsExtractor::getFileContents).collect(Collectors.toList());
         List<Map<String, String>> mapList = new ArrayList<>();
-        for (Map.Entry<String, File> localeFileEntry : sourceFiles.entrySet()) {
+        for (Map.Entry<String, BufferedReader> localeFileEntry : sourceFiles.entrySet()) {
             Map<String, String> contentsMap = contentsExtractor.getFileContents(localeFileEntry.getValue(), localeFileEntry.getKey());
             mapList.add(contentsMap);
         }
