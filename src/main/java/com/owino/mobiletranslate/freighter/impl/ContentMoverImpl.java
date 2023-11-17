@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ContentMoverImpl implements ContentMover {
-    private static final Logger log = Logger.getLogger(ContentMover.class.getSimpleName());
-
     /**
      * Moves content to other matching folders based on a locale signature e.g
      * ar-xx, ab-xx
@@ -35,6 +32,8 @@ public class ContentMoverImpl implements ContentMover {
                 return Collections.singletonList("bg-rBG");
             case "bs":
                 return Collections.singletonList("bs-rBA");
+            case "af":
+                return Collections.singletonList("af-rNA");
             case "cs":
                 return Collections.singletonList("cs-rCZ");
             case "de":
@@ -44,19 +43,23 @@ public class ContentMoverImpl implements ContentMover {
             case "es":
                 return Arrays.asList("es-rAR", "es-rBO", "es-rCL", "es-rCO", "es-rCR", "es-rCU", "es-rDO",
                         "es-rEC", "es-rES", "es-rGQ", "es-rGT", "es-rHN", "es-rMX", "es-rNI", "es-rPA", "es-rPE",
-                        "es-rPH", "es-rPR", "es-rPY", "es-rSV", "es-rUS", "es-rUY", "es-rVE","es-rBR","es-rBZ", "de-rIT");
+                        "es-rPH", "es-rPR", "es-rPY", "es-rSV", "es-rUS", "es-rUY", "es-rVE", "es-rBR", "es-rBZ", "de-rIT");
             case "fr":
                 return Arrays.asList("fr-rBE", "fr-rBF", "fr-rBI", "fr-rBJ",
                         "fr-rCA", "fr-rCD", "fr-rCF",
-                        "fr-rCG", "fr-rCM", "fr-rDZ", "fr-rDJ","fr-rFR","fr-rGA",
+                        "fr-rCG", "fr-rCM", "fr-rDZ", "fr-rDJ", "fr-rFR", "fr-rGA",
                         "fr-rGF", "fr-rGN", "fr-rGP", "fr-rGQ", "fr-rHT",
-                        "fr-rLU", "fr-rMA", "fr-rMG","fr-rML", "fr-rMQ",
+                        "fr-rLU", "fr-rMA", "fr-rMG", "fr-rML", "fr-rMQ",
                         "fr-rNE", "fr-rPF", "fr-rSN", "fr-rTG",
                         "fr-rKM", "fr-rTD", "fr-rMR", "fr-rCI");
             case "ga":
                 return Collections.singletonList("ga-rIE");
             case "hi":
                 return Collections.singletonList("hi-rIN");
+                case "bn":
+                    return Arrays.asList("bn-rBD", "bn-rIN");
+            case "ko":
+                return Collections.singletonList("ko-rKR");
             case "hu":
                 return Collections.singletonList("hu-rHU");
             case "hy":
@@ -135,8 +138,8 @@ public class ContentMoverImpl implements ContentMover {
                 return Arrays.asList("pt-rAO", "pt-rBR", "pt-rCV", "pt-rGW", "pt-rMO", "pt-rMZ", "pt-rPT", "pt-rST", "pt-rTL");
             case "nl":
                 return Arrays.asList("nl-rAW", "nl-rBE", "nl-rBQ", "nl-rCW", "nl-rNL", "nl-rSR", "nl-rSX");
-
-
+            case "zh":
+                return Arrays.asList("zh-rCN", "zh-rHK", "zh-rMO", "zh-rSG", "zh-rTW");
         }
         return new ArrayList<>();
     }

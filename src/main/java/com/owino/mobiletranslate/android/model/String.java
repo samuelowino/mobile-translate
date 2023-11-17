@@ -42,8 +42,8 @@ public class String {
     @Override
     public java.lang.String toString() {
         return "String{" +
-                "name='" + name + '\'' +
-                ", content='" + content + '\'' +
-                '}';
+                "name='" + name +'\'' +
+                ", content='" + content +'\'' +
+               '}';
     }
 }
