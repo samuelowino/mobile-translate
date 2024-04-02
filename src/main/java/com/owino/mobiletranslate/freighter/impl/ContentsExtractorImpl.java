@@ -71,8 +71,6 @@ public class ContentsExtractorImpl implements ContentsExtractor {
      */
     @Override
     public Map<String, BufferedReader> getSourcesFiles() {
-//        return languages.stream().map(File::new)
-//                .collect(Collectors.toList()); //todo left this half way
         Map<String, BufferedReader> sourceFiles = new HashMap<>();
         for (String language : languages) {
             var fileInputStream = IOUtils.loadResourceFileUrl(language + ".xml");

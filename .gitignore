@@ -12,3 +12,4 @@ strings.xml
 /resources/files
 src/main/resources/files
 /src/main/resources/files
+.DS_Store
