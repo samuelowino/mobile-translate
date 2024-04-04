@@ -49,7 +49,7 @@ public interface LocalizableFileProcessor {
      * @param translatedLocalizable List
      * @param locale String en, fr
      */
-    void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable,  String locale, File rootFilePath) throws IOException;
+    void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable,  String locale) throws IOException;
 
     /**
      * Create a destination file for the translated contents
@@ -57,7 +57,7 @@ public interface LocalizableFileProcessor {
      * @param localeSymbol String such en, fr
      * @return File lo-localizable.string
      */
-    File generateLocalizableDestinationFile(File rootFilePath, String localeSymbol) throws IOException;
+    File generateLocalizableDestinationFile(String localeSymbol) throws IOException;
 
     /**
      * Generates the root folder where the translated resources will be placed after translation

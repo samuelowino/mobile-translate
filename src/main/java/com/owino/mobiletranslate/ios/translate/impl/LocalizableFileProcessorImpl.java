@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,16 +39,14 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     public LocalizableTable getLocalizableTableFromString(String textLineOfLocalizable) {
         log.info("Obtaining localizable table from a line of localizable text\n==>" + textLineOfLocalizable);
         var components = textLineOfLocalizable.split("[=]");
-
         Arrays.stream(components).forEach(System.out::println);
-
         return new LocalizableTable(components[0], components[1]);
     }
 
     @Override
     public List<LocalizableTable> extractLocalizableTableFromFile(File localizableFile) {
         try {
-            return Files.lines(localizableFile.toPath(), StandardCharsets.UTF_16)
+            return Files.lines(localizableFile.toPath(), StandardCharsets.UTF_8)
                     .map(this::getLocalizableTableFromString)
                     .collect(Collectors.toList());
         } catch (IOException e) {
@@ -72,9 +71,9 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     }
 
     @Override
-    public void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable, String locale, File rootFilePath) throws IOException {
+    public void placeTranslatedTextInDestinationDir(List<LocalizableTable> translatedLocalizable, String locale) throws IOException {
         log.info("Writing translated content to file| estimated size " + translatedLocalizable.size());
-        var destinationFile = generateLocalizableDestinationFile(rootFilePath, locale);
+        var destinationFile = generateLocalizableDestinationFile(locale);
         if (!Files.exists(destinationFile.toPath()))
             throw new AssertionError("Invalid destination file " + destinationFile);
         for (LocalizableTable localizableTable : translatedLocalizable) {
@@ -93,11 +92,14 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
     }
 
     @Override
-    public File generateLocalizableDestinationFile(File rootFilePath, String localeSymbol) throws IOException {
-        var directory = new File(rootFilePath.getPath().concat("/" + localeSymbol).concat(".lproj"));
-        Files.createDirectory(directory.toPath());
-        var localizableFile = new File(directory + "/Localizable.strings");
-        var finalFilePath = Files.createFile(localizableFile.toPath());
-        return finalFilePath.toFile();
+    public File generateLocalizableDestinationFile(String localeSymbol) throws IOException {
+        try {
+            var localizableFile = new File(localeSymbol + ".txt");
+            var finalFilePath = Files.createFile(localizableFile.toPath());
+            return finalFilePath.toFile();
+        } catch (FileAlreadyExistsException ex) {
+            log.info("File already exists");
+            return new File(localeSymbol + ".txt");
+        }
     }
 }

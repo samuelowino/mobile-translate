@@ -13,3 +13,4 @@ strings.xml
 src/main/resources/files
 /src/main/resources/files
 .DS_Store
+*.DS_Store
