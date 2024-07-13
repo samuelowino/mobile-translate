@@ -1,7 +1,6 @@
 package com.owino.mobiletranslate.freighter.utils;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class IOUtils {

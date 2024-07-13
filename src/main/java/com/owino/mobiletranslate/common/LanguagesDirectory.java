@@ -10,20 +10,22 @@ import java.util.stream.Collectors;
 public class LanguagesDirectory {
 
      private final List<String> languages = Arrays.asList(
-             "ha", "pl", "am", "ar", "az", "be", "bg", "bn", "bs", "fr", "ga",
-             "ca", "cs", "da", "es", "et", "fa", "fi", "gl",
-             "it", "iw", "ja", "jv", "ka", "km", "ko", "ky",
-             "my", "nb", "ne", "nl", "no", "pa", "ro", "ru", "si", "sk", "sl", "sq", "sr",
-             "sv", "sw", "ta", "te", "th", "tr", "vi", "zh", "zu", "kn", "kk",
-             "af", "de", "fil", "hi", "hr", "hu", "hy", "id", "in", "lo", "lv", "mk", "ml",
-             "mn", "pt", "uk", "ur", "ms", "is", "el", "mr",
-             "haw","he","ku","la","lt","lb","so"
+             "ar","az","be","bg","bn","bs","fr","pl",
+             "ha", "am",  "ga", "ca", "cs", "da", "es",
+             "et", "fa", "fi", "gl", "it", "iw", "ja",
+             "jv", "ka", "km", "ko", "ky", "my", "nb",
+             "ne", "nl", "no", "pa", "ro", "ru", "si",
+             "sk", "sl", "sq", "sr", "sv", "sw", "ta",
+             "te", "th", "tr", "vi", "zh", "zu", "kn", "kk",
+             "af", "de", "fil", "hi", "hr", "hu", "hy", "id",
+             "in", "lo", "lv", "mk", "ml", "mn", "pt",
+             "uk", "ur", "ms", "is", "el", "mr", "haw","he","ku","la","lt","lb","so"
      );
 
 
     public List<String> findUniqueListOfLocales() {
 
-        log.info("Cleaning up locales list...");
+        //log.info("Cleaning up locales list...");
 
         return languages.stream()
                 .distinct()

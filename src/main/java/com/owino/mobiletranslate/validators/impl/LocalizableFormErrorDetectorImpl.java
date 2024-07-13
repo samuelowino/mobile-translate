@@ -4,7 +4,6 @@ import com.owino.mobiletranslate.common.RunnerInputReader;
 import com.owino.mobiletranslate.enums.LocalizeErrorType;
 import com.owino.mobiletranslate.validators.LocalizableFormErrorDetector;
 import com.owino.mobiletranslate.validators.model.LocalizableFormatError;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,15 +11,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Slf4j
 public class LocalizableFormErrorDetectorImpl implements LocalizableFormErrorDetector {
     @Override
     public List<LocalizableFormatError> findErrorInFile(File stringsFile) throws IOException {
 
-        log.info("findErrorInFile FILE " + stringsFile.toPath());
+        //log.info("findErrorInFile FILE " + stringsFile.toPath());
 
         List<LocalizableFormatError> errors = new ArrayList<>();
 
@@ -57,9 +54,9 @@ public class LocalizableFormErrorDetectorImpl implements LocalizableFormErrorDet
 
     @Override
     public void reportErrors(List<LocalizableFormatError> errors) {
-        log.debug("Found " + errors.size() + " errors in this file");
+        //log.debug("Found " + errors.size() + " errors in this file");
         for (LocalizableFormatError error : errors) {
-            log.info(error.getLineStatement() + "\n==>" + error.getErrorDescription());
+            //log.info(error.getLineStatement() + "\n==>" + error.getErrorDescription());
         }
     }
 }
