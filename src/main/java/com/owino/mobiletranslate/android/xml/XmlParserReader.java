@@ -64,7 +64,9 @@ public class XmlParserReader {
             return resources;
 
         } catch (JAXBException e) {
-            e.printStackTrace();
+            //testing stable with changes
+            log.info("Invalid XML format detected in the pre-translate input. Please refer to the documentation for correct usage");
+             e.printStackTrace();
 
             return null;
         }
