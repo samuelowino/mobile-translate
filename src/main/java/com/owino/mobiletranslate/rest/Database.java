@@ -12,10 +12,11 @@ public class Database {
     public  static void initializeDatabase() {
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement()) {
-
+            stmt.execute("DROP TABLE IF EXISTS users");
+            stmt.execute("DROP TABLE IF EXISTS api_keys");
             // Enable foreign key support
             stmt.execute("PRAGMA foreign_keys = ON");
-            stmt.execute("DROP TABLE IF EXISTS users");
+            //stmt.execute("DROP TABLE IF EXISTS users");
 
             stmt.execute("CREATE TABLE users " +
                     "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
