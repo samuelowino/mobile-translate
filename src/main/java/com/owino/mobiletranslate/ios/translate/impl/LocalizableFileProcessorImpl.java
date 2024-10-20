@@ -4,6 +4,7 @@ import com.owino.mobiletranslate.common.RunnerInputReader;
 import com.owino.mobiletranslate.googletranslate.GoogleTranslator;
 import com.owino.mobiletranslate.ios.model.LocalizableTable;
 import com.owino.mobiletranslate.ios.translate.LocalizableFileProcessor;
+import com.owino.mobiletranslate.rest.payload.IOSMessage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedWriter;
@@ -14,10 +15,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -90,6 +88,17 @@ public class LocalizableFileProcessorImpl implements LocalizableFileProcessor {
         var path = Files.createDirectory(rootFolder.toPath());
         return path.toFile();
     }
+
+    @Override
+    public List<IOSMessage> translateLocalizable(List<IOSMessage> languageTranslations, String targetLanguage) {
+        List<IOSMessage> translatedLocalizableTable = new ArrayList<>();
+        for (IOSMessage unTranslatedTable : languageTranslations) {
+            var translatedBytes = googleTranslator.getTranslatedBytes(unTranslatedTable.content(), targetLanguage);
+            translatedLocalizableTable.add(new IOSMessage(unTranslatedTable.key(),new String(translatedBytes, StandardCharsets.UTF_16)));
+        }
+        return translatedLocalizableTable;
+    }
+
 
     @Override
     public File generateLocalizableDestinationFile(String localeSymbol) throws IOException {

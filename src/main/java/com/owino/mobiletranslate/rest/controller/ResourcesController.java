@@ -2,6 +2,7 @@ package com.owino.mobiletranslate.rest.controller;
 
 import com.owino.mobiletranslate.android.AndroidTranslationProcessor;
 import com.owino.mobiletranslate.android.model.Resources;
+import com.owino.mobiletranslate.ios.iOSTranslationProcessor;
 import com.owino.mobiletranslate.rest.DatabaseConfig;
 import com.owino.mobiletranslate.rest.exception.ErrorResponse;
 import com.owino.mobiletranslate.rest.exception.ValidationException;
@@ -14,6 +15,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.*;
 import java.sql.*;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -73,8 +75,8 @@ public class ResourcesController {
     private static void processPayload(TranslatePayload payload,Context ctx) throws ValidationException, IOException {
         switch(payload){
             case AndroidPayload androidPayload ->{
-                Set<String> target_lang=androidPayload.distinctLanguages();
-                Set<XmlMessage> xml_content=androidPayload.xmlContent();
+                List<String> target_lang=androidPayload.distinctLanguages();
+                List<XmlMessage> xml_content=androidPayload.xmlContent();
                 com.owino.mobiletranslate.android.model.String[] androidJsonstring=new com.owino.mobiletranslate.android.model.String[xml_content.size()];
                 int index=0;
                 for(XmlMessage x: xml_content){
@@ -86,20 +88,13 @@ public class ResourcesController {
                 //new AndroidTranslationProcessor().runTranslation(translationResources,target_lang);
                 ctx.status(HttpStatus.OK).json(new AndroidTranslationProcessor().runTranslation(translationResources,target_lang));
                 java.lang.String outputfile="src/main/resources/files/input.xml";
-               // toXml(translationResources,outputfile);
-                //logger.info("Resources\n"+ translationResources);
+
             }
             case IOSPayload iosPayload ->{
-                Set<IOSMessage> ios_content =iosPayload.iosContent();
-                String filepath="src/main/resources/files/output-ios.txt";
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {  // Open writer once outside the loop
-                    for (IOSMessage x : ios_content) {
-                        String line = "\"" + x.key() + "\" = \"" + x.content() + "\";";
-                        writer.write(line);
-                        writer.newLine();
-                    }
-                }
-              logger.info("written to ios.txt");
+                List<IOSMessage> ios_content =iosPayload.iosContent();
+                List<String>  distinct_languages=iosPayload.distinctLanguages();
+                 ctx.status(HttpStatus.OK).json(new iOSTranslationProcessor().runTranslation(ios_content,distinct_languages));
+
             }
         }
     }

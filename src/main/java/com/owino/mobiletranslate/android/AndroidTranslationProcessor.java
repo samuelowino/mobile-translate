@@ -7,7 +7,7 @@ import java.util.Set;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.android.xml.XmlParserReader;
 import com.owino.mobiletranslate.common.TranslationProcessor;
-import com.owino.mobiletranslate.rest.payload.AndroidTranslationResponse;
+import com.owino.mobiletranslate.rest.payload.TranslationResponse;
 
 public class AndroidTranslationProcessor implements TranslationProcessor {
     public void runTranslation(File outputFile, List<String> targetLanguages){
@@ -16,7 +16,7 @@ public class AndroidTranslationProcessor implements TranslationProcessor {
     /*
       * stuck with same name but method signatures are a bit different
      */
-    public AndroidTranslationResponse runTranslation(Resources input, Set<String> targetLanguages){
+    public TranslationResponse runTranslation(Resources input, List<String> targetLanguages){
      return    new XmlParserReader().executeXmlAndTranslationParser(input,targetLanguages);
     }
 }

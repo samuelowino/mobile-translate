@@ -11,7 +11,9 @@ import com.owino.mobiletranslate.rest.payload.*;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 /*
@@ -44,7 +46,7 @@ public class TranslatePayloadDeserializer extends StdDeserializer<TranslatePaylo
         validateCommonFields(node);
 
         String targetOS = node.get("targetOS").asText().toUpperCase();
-        Set<String> distinctLanguages = deserializeSet(jp, node, "distinctLanguages");
+        List<String> distinctLanguages = deserializeSet(jp, node, "distinctLanguages");
 
         return switch (targetOS) {
             case "ANDROID" -> deserializeAndroidPayload(jp, node, targetOS, distinctLanguages);
@@ -68,9 +70,9 @@ public class TranslatePayloadDeserializer extends StdDeserializer<TranslatePaylo
     }
 
     @SneakyThrows
-    private AndroidPayload deserializeAndroidPayload(JsonParser jp, ObjectNode node, String targetOS, Set<String> distinctLanguages) throws IOException {
+    private AndroidPayload deserializeAndroidPayload(JsonParser jp, ObjectNode node, String targetOS, List<String> distinctLanguages) throws IOException {
 
-        Set<XmlMessage> xmlContent = new HashSet<>();
+        List<XmlMessage> xmlContent = new ArrayList<>();
         JsonNode xmlContentNode = node.get("xmlContent");
 
         if (xmlContentNode == null || xmlContentNode.isEmpty()) {
@@ -94,8 +96,8 @@ public class TranslatePayloadDeserializer extends StdDeserializer<TranslatePaylo
     }
 
     @SneakyThrows
-    private IOSPayload deserializeIOSPayload(JsonParser jp, ObjectNode node, String targetOS, Set<String> distinctLanguages) throws IOException {
-        Set<IOSMessage> iosContent = new HashSet<>();
+    private IOSPayload deserializeIOSPayload(JsonParser jp, ObjectNode node, String targetOS, List<String> distinctLanguages) throws IOException {
+        List<IOSMessage> iosContent = new ArrayList<>();
         JsonNode iosContentNode=node.get("iosContent");
         if (iosContentNode == null || iosContentNode.isEmpty()) {
             throw new ValidationException("iosContent must not be empty for iOS payload");
@@ -115,14 +117,14 @@ public class TranslatePayloadDeserializer extends StdDeserializer<TranslatePaylo
     }
 
     @SneakyThrows
-    private <T> Set<T> deserializeSet(JsonParser jp, ObjectNode node, String fieldName) throws IOException {
+    private <T> List<T> deserializeSet(JsonParser jp, ObjectNode node, String fieldName) throws IOException {
         JsonNode contentNode = node.get(fieldName);
         if (contentNode == null || !contentNode.isArray()) {
             throw new ValidationException(fieldName + " must be a non-null array");
         }
         return jp.getCodec().readValue(
                 contentNode.traverse(jp.getCodec()),
-                new TypeReference<Set<T>>() {}
+                new TypeReference<List<T>>() {}
         );
     }
 }

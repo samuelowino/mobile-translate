@@ -15,7 +15,7 @@ import javax.xml.bind.Unmarshaller;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.android.model.String;
 import com.owino.mobiletranslate.android.translate.AndroidTranslateFactory;
-import com.owino.mobiletranslate.rest.payload.AndroidTranslationResponse;
+import com.owino.mobiletranslate.rest.payload.TranslationResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -45,7 +45,7 @@ public class XmlParserReader {
      *
      * stuck with same name but method signatures are a bit different
      */
-    public AndroidTranslationResponse executeXmlAndTranslationParser(Resources input, Set<java.lang.String> targetLanguages) {
+    public TranslationResponse executeXmlAndTranslationParser(Resources input, List<java.lang.String> targetLanguages) {
 
         log.info("Translating " + targetLanguages.size() );
         Map<java.lang.String, Map<java.lang.String, java.lang.String>> allTranslations = new HashMap<>();
@@ -62,7 +62,7 @@ public class XmlParserReader {
             }
             allTranslations.put(targetLanguage,languageTranslations);
         }
-        return new AndroidTranslationResponse(
+        return new TranslationResponse(
                 "TRANSLATE",
                 "ANDROID",
                 allTranslations
