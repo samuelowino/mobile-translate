@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.owino.mobiletranslate.rest.controller.ResourcesController;
 import com.owino.mobiletranslate.rest.controller.UserController;
 import com.owino.mobiletranslate.rest.customs.TranslatePayloadDeserializer;
+import com.owino.mobiletranslate.rest.db.DatabaseManager;
 import com.owino.mobiletranslate.rest.exception.ErrorResponse;
 import com.owino.mobiletranslate.rest.exception.ValidationException;
 import com.owino.mobiletranslate.rest.payload.TranslatePayload;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
 public class Main {
     static Set<String> publicRoutes=Set.of("/register","/login");
     private static Map<String, String> errordetails= new HashMap<>();
-    private static Logger logger=Logger.getLogger(Main.class.getSimpleName());
+
     /*
       * register custom deserializer with object mapper
      */
@@ -31,7 +32,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Database.initializeDatabase();
+        DatabaseManager.initializeDatabase();
         module.addDeserializer(TranslatePayload.class, new TranslatePayloadDeserializer());
         my_objectMapper.registerModule(module);
         var app = Javalin.create(javalinConfig ->{
@@ -43,7 +44,6 @@ public class Main {
             if(!publicRoutes.contains(ctx.path())) {
                 java.lang.String api_key = ctx.header("X-API-KEY");
                 if (api_key == null) {
-                    //logger.info(java.lang.String.valueOf(ctx.url()));
                     errordetails.put("status_code", "401");
                     errordetails.put("reason", "not authenticated");
                     errordetails.put("issue url", "http://localhost:6969/login");

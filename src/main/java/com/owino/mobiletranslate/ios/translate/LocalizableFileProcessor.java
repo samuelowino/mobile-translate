@@ -70,6 +70,13 @@ public interface LocalizableFileProcessor {
      * @return File
      */
     File generateRootTranslationsOutputFolder() throws IOException;
+
+    /**
+     * Processes the request payload to a target language
+     * @param languageTranslations request body payload
+     * @param targetLanguage  locale to target
+     * @return list of translated strings
+     */
    List<IOSMessage> translateLocalizable(List<IOSMessage> languageTranslations,String targetLanguage);
 
 }

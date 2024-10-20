@@ -5,11 +5,12 @@ import com.owino.mobiletranslate.rest.exception.ErrorResponse;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.logging.Logger;
 
 public class UserPayloadValiditor {
-    private  static Logger logger= Logger.getLogger(UserPayloadValiditor.class.getSimpleName());
+
 
     public static  void userRegistrationValidator(Context ctx){
         try {
@@ -22,7 +23,6 @@ public class UserPayloadValiditor {
                             obj -> obj.password() != null && !obj.password().isEmpty(), "Password must not be empty"
                     ).get();
         }catch (BadRequestResponse e){
-            logger.info("YOU KNOW BAD REQUEST");
             ctx.status(HttpStatus.BAD_REQUEST).json(new ErrorResponse("Bad Request", "Invalid body"));
         }
     }
@@ -36,7 +36,6 @@ public class UserPayloadValiditor {
                             obj -> obj.password() != null && !obj.password().isEmpty(), "Password must not be empty"
                     ).get();
         }catch (BadRequestResponse e){
-            logger.info("YOU KNOW BAD REQUEST");
             ctx.status(HttpStatus.BAD_REQUEST).json(new ErrorResponse("Bad Request", "Invalid body"));
         }
     }

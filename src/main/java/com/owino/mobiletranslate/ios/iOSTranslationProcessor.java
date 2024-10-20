@@ -26,11 +26,8 @@ public class iOSTranslationProcessor implements TranslationProcessor {
         Map<String,Map<String,String>> allTranslations =new HashMap<>();
         for(String targetLanguage: targetLanguages){
             Map<String,String > localeTranslated=new HashMap<>();
-            List<IOSMessage> languageTranslations = new ArrayList<>();
-            languageTranslations=processor.translateLocalizable(input,targetLanguage);
-            for (IOSMessage x : languageTranslations) {
-                localeTranslated.put(x.key(), x.content());
-            }
+            List<IOSMessage> languageTranslations = processor.translateLocalizable(input, targetLanguage);
+            languageTranslations.stream().forEach(x ->localeTranslated.put(x.key(), x.content()));
             allTranslations.put(targetLanguage,localeTranslated);
         }
         return  new TranslationResponse(

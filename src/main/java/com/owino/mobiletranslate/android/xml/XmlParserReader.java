@@ -3,10 +3,7 @@ package com.owino.mobiletranslate.android.xml;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class XmlParserReader {
 
-    private static final Logger LOGGER = Logger.getLogger(XmlParserReader.class.getSimpleName());
+
 
     public void executeXmlAndTranslationParser(File outputFile, List<java.lang.String> targetLanguages) {
 

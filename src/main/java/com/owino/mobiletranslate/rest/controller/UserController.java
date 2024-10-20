@@ -1,6 +1,6 @@
 package com.owino.mobiletranslate.rest.controller;
 
-import com.owino.mobiletranslate.rest.DatabaseConfig;
+import com.owino.mobiletranslate.rest.db.DatabaseManager;
 import com.owino.mobiletranslate.rest.payload.User;
 import com.owino.mobiletranslate.rest.response.ValidResponse;
 import com.owino.mobiletranslate.rest.exception.ErrorResponse;
@@ -9,17 +9,17 @@ import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
 import java.util.UUID;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
-
+@Slf4j
 public class UserController {
-    private static Logger logger = Logger.getLogger(UserController.class.getSimpleName());
+
     static Argon2 argon2 = Argon2Factory.create();
 
-    private static final java.lang.String DB_URL="jdbc:sqlite:auth.db";
+
     private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_]{3,20}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$");
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
@@ -28,7 +28,6 @@ public class UserController {
     */
    public static void registerUser(Context ctx) {
        if (ctx.body().isEmpty()) {
-           logger.info("Empty request body received for user registration");
            ctx.status(HttpStatus.BAD_REQUEST).json(new ErrorResponse("Bad request", "Request body required"));
            return;
        }
@@ -39,7 +38,7 @@ public class UserController {
            return;
        }
 
-       try (Connection conn = DatabaseConfig.getDataSource().getConnection()) {
+       try (Connection conn = DatabaseManager.getDataSource().getConnection()) {
            conn.setAutoCommit(false);  // Start transaction
 
            // Check if username or email already exists
@@ -63,7 +62,7 @@ public class UserController {
                }
            }
 
-           // If we reach here, username and email are unique
+
            String hashedPassword = argon2.hash(2, 65536, 1, userDetails.password());
 
            try (PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO users (username, email, password) VALUES (?, ?, ?)")) {
@@ -72,15 +71,15 @@ public class UserController {
                insertStmt.setString(3, hashedPassword);
                insertStmt.executeUpdate();
 
-               conn.commit();  // Commit transaction
+               conn.commit();
                ctx.status(HttpStatus.CREATED).result("User registered successfully");
-               logger.info("User registered successfully: " + userDetails.email());
+
            } catch (SQLException e) {
-               conn.rollback();  // Rollback transaction on error
-               throw e;  // Re-throw to be caught by outer catch block
+               conn.rollback();
+               throw e;
            }
        } catch (SQLException e) {
-           logger.info("Error registering user: " + userDetails.email() + " " + e);
+
            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Error registering user", "An error occurred processing request. You can try again after a while."));
        }
    }
@@ -89,14 +88,13 @@ public class UserController {
     */
    public static void loginUser(Context ctx) {
        if(ctx.body().isEmpty()) {
-           logger.info("Empty request body received for login");
            ctx.status(HttpStatus.BAD_REQUEST).json(new ErrorResponse("Bad request","Request body required"));
            return;
        }
        UserPayloadValiditor.userLoginValidator(ctx);
        User userDetails = ctx.bodyAsClass(User.class);
 
-       try (Connection conn = DatabaseConfig.getDataSource().getConnection()) {
+       try (Connection conn = DatabaseManager.getDataSource().getConnection()) {
            conn.setAutoCommit(false);  // Start transaction
            try (PreparedStatement pstmt = conn.prepareStatement("SELECT id, password FROM users WHERE username = ?")) {
                pstmt.setString(1, userDetails.username());
@@ -107,15 +105,15 @@ public class UserController {
                        java.lang.String apiKey = generateApiKey(userId, conn);
                        conn.commit();  // Commit transaction
                        ctx.json(new ValidResponse(200,"Login successful. Your API key is: ",apiKey));
-                       logger.info("User logged in successfully: " + userDetails.username());
+
                    } else {
                        ctx.status(HttpStatus.UNAUTHORIZED).json(new ErrorResponse("Unauthorized","Invalid username or password"));
-                       logger.info("Failed login attempt for user: " + userDetails.username());
+
                    }
                }
            }
        } catch (SQLException e) {
-           logger.info("Error during login process for user: " + userDetails.username() + e);
+           log.warn("Error during login process for user: {} {}" , userDetails.username() , e);
            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Internal Server Error","Error logging in"));
        }
    }
@@ -130,8 +128,8 @@ public class UserController {
            pstmt.setString(2, apiKey);
            pstmt.executeUpdate();
        } catch (SQLException e) {
-           logger.info("Error generating API key for user ID: " + userId + e);
-           throw e; // rethrow the exception after logging
+           log.warn("Error generating API key for user ID: {} {} " ,userId ,e);
+           throw e;
        }
 
        return apiKey;
@@ -146,8 +144,8 @@ public class UserController {
            return;
        }
 
-       try (Connection conn = DatabaseConfig.getDataSource().getConnection()) {
-           conn.setAutoCommit(false);  // Start transaction
+       try (Connection conn = DatabaseManager.getDataSource().getConnection()) {
+           conn.setAutoCommit(false);
 
            try (PreparedStatement selectStmt = conn.prepareStatement("SELECT user_id FROM api_keys WHERE api_key = ?");
                 PreparedStatement deleteStmt = conn.prepareStatement("DELETE FROM api_keys WHERE api_key = ?")) {
@@ -163,11 +161,10 @@ public class UserController {
 
                        conn.commit();  // Commit transaction
                        ctx.json(new ValidResponse(200,"New API key: ",newApiKey));
-                       logger.info("API key refreshed for user ID: " + userId);
+
                    } else {
-                       conn.rollback();  // Rollback transaction
+                       conn.rollback();
                        ctx.status(HttpStatus.UNAUTHORIZED).json(new ErrorResponse("Unauthorized","Invalid API key"));
-                       logger.info("Attempt to refresh with invalid API key: " + oldApiKey);
                    }
                }
            } catch (SQLException e) {
@@ -175,7 +172,7 @@ public class UserController {
                throw e;
            }
        } catch (SQLException e) {
-           logger.info("Error refreshing API key: " + e);
+           log.warn("Error refreshing API key: {}" , e);
            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Internal Server Error","Error logging in"));
        }
    }
