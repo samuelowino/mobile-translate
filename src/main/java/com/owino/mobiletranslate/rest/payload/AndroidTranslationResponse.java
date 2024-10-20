@@ -1,4 +1,6 @@
 package com.owino.mobiletranslate.rest.payload;
 
-public record AndroidTranslationResponse() {
+import java.util.Map;
+
+public record AndroidTranslationResponse(String workflow, String targetOS, Map<String,Map<String,String>> translations) {
 }

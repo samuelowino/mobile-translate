@@ -81,7 +81,7 @@
 "JOURNALING_SUGGESTIONS_ENTRY_81" = "List three things you want to accomplish in the next year";
 "JOURNALING_SUGGESTIONS_ENTRY_82" = "Reflect on progress you've made toward a long-term goal";
 "JOURNALING_SUGGESTIONS_ENTRY_83" = "Celebrate a habit you successfully incorporated into your routine";
-"JOURNALING_SUGGESTIONS_ENTRY_84" = "utline your short-term and long-term financial goals. What steps can you take today to move closer to achieving one of your financial goals?";
+"JOURNALING_SUGGESTIONS_ENTRY_84" = "outline your short-term and long-term financial goals. What steps can you take today to move closer to achieving one of your financial goals?";
 "JOURNALING_SUGGESTIONS_ENTRY_85" = "How do your spending habits align with your financial priorities?";
 "JOURNALING_SUGGESTIONS_ENTRY_86" = "Identify a current financial challenge or obstacle. What strategies can you implement to overcome it?";
 "JOURNALING_SUGGESTIONS_ENTRY_87" = "Reflect on a past financial setback and the lessons learned from the experience";

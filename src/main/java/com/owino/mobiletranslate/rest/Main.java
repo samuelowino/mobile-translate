@@ -36,6 +36,7 @@ public class Main {
         my_objectMapper.registerModule(module);
         var app = Javalin.create(javalinConfig ->{
                     javalinConfig.jsonMapper(new JavalinJackson(my_objectMapper,true));
+
                 })
                 .start(6969);
         app.before(ctx ->{

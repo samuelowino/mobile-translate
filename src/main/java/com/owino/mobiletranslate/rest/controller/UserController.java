@@ -1,7 +1,7 @@
 package com.owino.mobiletranslate.rest.controller;
 
 import com.owino.mobiletranslate.rest.DatabaseConfig;
-import com.owino.mobiletranslate.rest.User;
+import com.owino.mobiletranslate.rest.payload.User;
 import com.owino.mobiletranslate.rest.response.ValidResponse;
 import com.owino.mobiletranslate.rest.exception.ErrorResponse;
 import com.owino.mobiletranslate.rest.validator.UserPayloadValiditor;

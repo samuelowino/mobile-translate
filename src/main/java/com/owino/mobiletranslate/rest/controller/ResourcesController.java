@@ -1,21 +1,18 @@
 package com.owino.mobiletranslate.rest.controller;
 
+import com.owino.mobiletranslate.android.AndroidTranslationProcessor;
 import com.owino.mobiletranslate.android.model.Resources;
 import com.owino.mobiletranslate.rest.DatabaseConfig;
 import com.owino.mobiletranslate.rest.exception.ErrorResponse;
 import com.owino.mobiletranslate.rest.exception.ValidationException;
-import com.owino.mobiletranslate.rest.payload.AndroidPayload;
-import com.owino.mobiletranslate.rest.payload.IOSPayload;
-import com.owino.mobiletranslate.rest.payload.TranslatePayload;
-import com.owino.mobiletranslate.rest.payload.XmlMessage;
+import com.owino.mobiletranslate.rest.payload.*;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -24,7 +21,7 @@ public class ResourcesController {
     private static Logger logger=Logger.getLogger(ResourcesController.class.getSimpleName());
     static Resources translationResources =new Resources();
     private static final long API_KEY_EXPIRATION = 7L * 24 * 60 * 60 * 1000;  // 7 days in milliseconds
-    public static void translateRoute(Context ctx) {
+    public static void translateRoute(Context ctx) throws IOException {
         java.lang.String apiKey = ctx.header("X-API-Key");
         if (apiKey == null || apiKey.trim().isEmpty()) {
             ctx.status(HttpStatus.UNAUTHORIZED).json(new ErrorResponse("Unauthorized","API key is required"));
@@ -53,7 +50,7 @@ public class ResourcesController {
                     } else {
                         try {
                             TranslatePayload payload = ctx.bodyAsClass(TranslatePayload.class);
-                            processPayload(payload);
+                            processPayload(payload,ctx);
                         }catch(ValidationException e){
                             ctx.status(400).json(new ErrorResponse("Bad request", e.getMessage()));
                         }
@@ -73,10 +70,10 @@ public class ResourcesController {
 
     }
 
-    private static void processPayload(TranslatePayload payload) throws ValidationException {
+    private static void processPayload(TranslatePayload payload,Context ctx) throws ValidationException, IOException {
         switch(payload){
             case AndroidPayload androidPayload ->{
-
+                Set<String> target_lang=androidPayload.distinctLanguages();
                 Set<XmlMessage> xml_content=androidPayload.xmlContent();
                 com.owino.mobiletranslate.android.model.String[] androidJsonstring=new com.owino.mobiletranslate.android.model.String[xml_content.size()];
                 int index=0;
@@ -86,12 +83,23 @@ public class ResourcesController {
                     androidJsonstring[index++]=new com.owino.mobiletranslate.android.model.String(x.name(), x.content());
                 }
                 translationResources.setStrings(androidJsonstring);
+                //new AndroidTranslationProcessor().runTranslation(translationResources,target_lang);
+                ctx.status(HttpStatus.OK).json(new AndroidTranslationProcessor().runTranslation(translationResources,target_lang));
                 java.lang.String outputfile="src/main/resources/files/input.xml";
-                toXml(translationResources,outputfile);
-                logger.info("Resources\n"+ translationResources);
+               // toXml(translationResources,outputfile);
+                //logger.info("Resources\n"+ translationResources);
             }
             case IOSPayload iosPayload ->{
-               logger.info("Not implemented");
+                Set<IOSMessage> ios_content =iosPayload.iosContent();
+                String filepath="src/main/resources/files/output-ios.txt";
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {  // Open writer once outside the loop
+                    for (IOSMessage x : ios_content) {
+                        String line = "\"" + x.key() + "\" = \"" + x.content() + "\";";
+                        writer.write(line);
+                        writer.newLine();
+                    }
+                }
+              logger.info("written to ios.txt");
             }
         }
     }

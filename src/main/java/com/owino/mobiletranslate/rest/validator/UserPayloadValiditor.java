@@ -1,6 +1,6 @@
 package com.owino.mobiletranslate.rest.validator;
 
-import com.owino.mobiletranslate.rest.User;
+import com.owino.mobiletranslate.rest.payload.User;
 import com.owino.mobiletranslate.rest.exception.ErrorResponse;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
