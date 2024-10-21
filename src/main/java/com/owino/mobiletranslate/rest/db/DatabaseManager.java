@@ -52,14 +52,16 @@ public class DatabaseManager {
 
         stmt.execute("CREATE INDEX IF NOT EXISTS idx_api_keys_user_id ON api_keys(user_id)");
     }
-
+   /*
+    * The name can be a bit misleading
+    */
     public static DataSource getDataSource() {
         if (dataSource == null) {
             synchronized (DatabaseManager.class) {
                 if (dataSource == null) {
                     HikariConfig config = new HikariConfig();
                     config.setJdbcUrl(DB_URL);
-                    config.setMaximumPoolSize(10);
+                    config.setMaximumPoolSize(10);//actually this is same as default
                     config.setMinimumIdle(5);
                     config.setIdleTimeout(300000); // 5 minutes
                     config.setMaxLifetime(1800000); // 30 minutes

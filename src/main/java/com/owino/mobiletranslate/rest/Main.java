@@ -10,6 +10,7 @@ import com.owino.mobiletranslate.rest.exception.ValidationException;
 import com.owino.mobiletranslate.rest.payload.TranslatePayload;
 
 import io.javalin.Javalin;
+import io.javalin.http.HttpStatus;
 import io.javalin.http.UnauthorizedResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.json.JavalinJackson;
@@ -21,7 +22,10 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 public class Main {
-    static Set<String> publicRoutes=Set.of("/register","/login");
+    private static final Set<String> PUBLIC_ROUTES = Set.of("/register", "/login");
+
+    private static final int PORT = 8080;
+
     private static Map<String, String> errordetails= new HashMap<>();
 
     /*
@@ -33,22 +37,21 @@ public class Main {
 
 
     public static void main(String[] args) {
-        DatabaseManager.initializeDatabase();
-        ResourcesController.startCleanupTask();
+        initializeApplication();
         module.addDeserializer(TranslatePayload.class, new TranslatePayloadDeserializer());
         my_objectMapper.registerModule(module);
         var app = Javalin.create(javalinConfig ->{
                     javalinConfig.jsonMapper(new JavalinJackson(my_objectMapper,true));
 
                 })
-                .start(6969);
+                .start(PORT);
         app.before(ctx ->{
-            if(!publicRoutes.contains(ctx.path())) {
+            if(!PUBLIC_ROUTES.contains(ctx.path())) {
                 java.lang.String api_key = ctx.header("X-API-KEY");
                 if (api_key == null) {
                     errordetails.put("status_code", "401");
                     errordetails.put("reason", "not authenticated");
-                    errordetails.put("issue url", "http://localhost:6969/login");
+                    errordetails.put("issue url", "http://localhost:8080/login");
                     throw new UnauthorizedResponse("unauthorized", errordetails);
                 }
             }
@@ -62,9 +65,17 @@ public class Main {
         app.exception(ValidationException.class, (e, ctx) -> {
             ctx.status(400).json(new ErrorResponse("Bad request", e.getLocalizedMessage()));
         });
-        /* register threads to execute when jvm stops */
+        registerShutdownHooks();
+    }
+    /*utility methods */
+    private static void initializeApplication() {
+        DatabaseManager.initializeDatabase();
+        ResourcesController.startCleanupTask();
+    }
+
+    /* register threads to execute when jvm stops */
+    private static void registerShutdownHooks() {
         Runtime.getRuntime().addShutdownHook(new Thread(ResourcesController::shutdown));
         Runtime.getRuntime().addShutdownHook(new Thread(DatabaseManager::closeDataSource));
     }
-
 }

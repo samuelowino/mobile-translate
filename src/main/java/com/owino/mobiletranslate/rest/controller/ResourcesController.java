@@ -87,7 +87,7 @@ public class ResourcesController {
             }
         } catch (SQLException e) {
             log.warn("Error validating API key {}", e.getMessage());
-            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).result("Error validating API key");
+            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Error validating API key","Error occurred trying to resolve api key"));
         }
 
     }
@@ -138,7 +138,7 @@ public class ResourcesController {
                 ongoingTranslations.remove(jobId);
             }
         }else{
-            ctx.status(HttpStatus.OK).json(new ValidResponse(202,"In Progress","Translation in progress"));
+            ctx.status(HttpStatus.ACCEPTED).json(new ValidResponse(202,"In Progress","Translation in progress"));
         }
     }
     /*
