@@ -8,6 +8,7 @@ import com.owino.mobiletranslate.rest.payload.TranslationResponse;
 
 import java.io.File;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class iOSTranslationProcessor implements TranslationProcessor {
     private LocalizableFileProcessor processor;
@@ -23,13 +24,13 @@ public class iOSTranslationProcessor implements TranslationProcessor {
         }
     }
     public TranslationResponse runTranslation(List<IOSMessage> input, List<String> targetLanguages){
-        Map<String,Map<String,String>> allTranslations =new HashMap<>();
-        for(String targetLanguage: targetLanguages){
-            Map<String,String > localeTranslated=new HashMap<>();
-            List<IOSMessage> languageTranslations = processor.translateLocalizable(input, targetLanguage);
-            languageTranslations.stream().forEach(x ->localeTranslated.put(x.key(), x.content()));
-            allTranslations.put(targetLanguage,localeTranslated);
-        }
+        Map<String, Map<String, String>> allTranslations = targetLanguages.stream()
+                .collect(Collectors.toMap(
+                        targetLanguage -> targetLanguage,
+                        targetLanguage -> processor.translateLocalizable(input, targetLanguage).stream()
+                                .collect(Collectors.toMap(IOSMessage::key, IOSMessage::content))
+                ));
+
         return  new TranslationResponse(
                 "TRANSLATION",
                 "IOS",
