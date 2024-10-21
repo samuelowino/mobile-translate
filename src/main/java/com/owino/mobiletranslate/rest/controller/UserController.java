@@ -24,7 +24,8 @@ public class UserController {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$");
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
 
-   /*method to register a user
+   /*
+    * method to register a user
     */
    public static void registerUser(Context ctx) {
        if (ctx.body().isEmpty()) {
@@ -37,11 +38,8 @@ public class UserController {
            ctx.status(HttpStatus.BAD_REQUEST).json(new ErrorResponse("Bad request", "Invalid username or password format. Check the accepted formats."));
            return;
        }
-
        try (Connection conn = DatabaseManager.getDataSource().getConnection()) {
-           conn.setAutoCommit(false);  // Start transaction
-
-           // Check if username or email already exists
+           conn.setAutoCommit(false);
            try (PreparedStatement checkStmt = conn.prepareStatement("SELECT username, email FROM users WHERE username = ? OR email = ?")) {
                checkStmt.setString(1, userDetails.username());
                checkStmt.setString(2, userDetails.email());
@@ -61,10 +59,7 @@ public class UserController {
                    }
                }
            }
-
-
            String hashedPassword = argon2.hash(2, 65536, 1, userDetails.password());
-
            try (PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO users (username, email, password) VALUES (?, ?, ?)")) {
                insertStmt.setString(1, userDetails.username());
                insertStmt.setString(2, userDetails.email());
@@ -83,9 +78,9 @@ public class UserController {
            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Error registering user", "An error occurred processing request. You can try again after a while."));
        }
    }
-   /*
-      user login
-    */
+     /*
+     * user login
+     */
    public static void loginUser(Context ctx) {
        if(ctx.body().isEmpty()) {
            ctx.status(HttpStatus.BAD_REQUEST).json(new ErrorResponse("Bad request","Request body required"));
@@ -95,7 +90,7 @@ public class UserController {
        User userDetails = ctx.bodyAsClass(User.class);
 
        try (Connection conn = DatabaseManager.getDataSource().getConnection()) {
-           conn.setAutoCommit(false);  // Start transaction
+           conn.setAutoCommit(false);
            try (PreparedStatement pstmt = conn.prepareStatement("SELECT id, password FROM users WHERE username = ?")) {
                pstmt.setString(1, userDetails.username());
                try (ResultSet rs = pstmt.executeQuery()) {
@@ -117,11 +112,11 @@ public class UserController {
            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Internal Server Error","Error logging in"));
        }
    }
-   /*
-      generating api key method
-    */
+     /*
+     *generating api key method
+     */
    private static java.lang.String generateApiKey(int userId, Connection conn) throws SQLException {
-       java.lang.String apiKey = UUID.randomUUID().toString();
+       String apiKey = UUID.randomUUID().toString();
 
        try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO api_keys (user_id, api_key) VALUES (?, ?)")) {
            pstmt.setInt(1, userId);
@@ -134,9 +129,9 @@ public class UserController {
 
        return apiKey;
    }
-   /*
-      refreshing api key very skeptic about use cases
-    */
+     /*
+     *refreshing api key very skeptic about use cases
+     */
    public static void refreshApiKey(Context ctx) {
        java.lang.String oldApiKey = ctx.header("X-API-Key");
        if (oldApiKey == null || oldApiKey.trim().isEmpty()) {
@@ -149,17 +144,14 @@ public class UserController {
 
            try (PreparedStatement selectStmt = conn.prepareStatement("SELECT user_id FROM api_keys WHERE api_key = ?");
                 PreparedStatement deleteStmt = conn.prepareStatement("DELETE FROM api_keys WHERE api_key = ?")) {
-
                selectStmt.setString(1, oldApiKey);
                try (ResultSet rs = selectStmt.executeQuery()) {
                    if (rs.next()) {
                        int userId = rs.getInt("user_id");
-                       java.lang.String newApiKey = generateApiKey(userId, conn);
-
+                       String newApiKey = generateApiKey(userId, conn);
                        deleteStmt.setString(1, oldApiKey);
                        deleteStmt.executeUpdate();
-
-                       conn.commit();  // Commit transaction
+                       conn.commit();
                        ctx.json(new ValidResponse(200,"New API key: ",newApiKey));
 
                    } else {
@@ -172,12 +164,15 @@ public class UserController {
                throw e;
            }
        } catch (SQLException e) {
-           log.warn("Error refreshing API key: {}" , e);
+           log.warn("Error refreshing API key: {}" , e.getMessage(),e);
            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorResponse("Internal Server Error","Error logging in"));
        }
    }
 
-   /*validation of accepted patterns for data kind of pattern matching inputs */
+     /*
+     *validation of accepted patterns for data
+     *kind of pattern matching inputs
+     */
    private static  boolean isValidEmail(java.lang.String email){
        return  EMAIL_PATTERN.matcher(email).matches();
    }

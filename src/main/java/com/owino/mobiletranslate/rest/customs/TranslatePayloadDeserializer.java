@@ -77,6 +77,7 @@ public class TranslatePayloadDeserializer extends StdDeserializer<TranslatePaylo
         if (xmlContentNode == null || xmlContentNode.isEmpty()) {
             throw new ValidationException("XmlContent must not be empty for Android payload");
         }
+        /* treat exceptions here as IOExceptions */
 
         if (xmlContentNode.isArray()) {
             for (JsonNode elementNode : xmlContentNode) {

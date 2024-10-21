@@ -14,6 +14,7 @@ import io.javalin.http.UnauthorizedResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.json.JavalinJackson;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +34,7 @@ public class Main {
 
     public static void main(String[] args) {
         DatabaseManager.initializeDatabase();
+        ResourcesController.startCleanupTask();
         module.addDeserializer(TranslatePayload.class, new TranslatePayloadDeserializer());
         my_objectMapper.registerModule(module);
         var app = Javalin.create(javalinConfig ->{
@@ -53,13 +55,16 @@ public class Main {
         });
         app.post("/register", UserController::registerUser);
         app.post("/login", UserController::loginUser);
-        app.post("/translate", ResourcesController::translateRoute);
+        app.post("/translate", ResourcesController::startTranslation);
+        app.get("/translate/{jobId}", ResourcesController::getTranslationStatus);
         app.post("/refresh", UserController::refreshApiKey);
-        app.get("/",ctx ->{
-           ctx.html("<h1>Hello World</h1>");
-        });
+
         app.exception(ValidationException.class, (e, ctx) -> {
-            ctx.status(400).json(new ErrorResponse("Bad request", e.getMessage()));
+            ctx.status(400).json(new ErrorResponse("Bad request", e.getLocalizedMessage()));
         });
+        /* register threads to execute when jvm stops */
+        Runtime.getRuntime().addShutdownHook(new Thread(ResourcesController::shutdown));
+        Runtime.getRuntime().addShutdownHook(new Thread(DatabaseManager::closeDataSource));
     }
+
 }
