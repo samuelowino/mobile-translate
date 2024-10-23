@@ -3,7 +3,10 @@ package com.owino.mobiletranslate.ios.translate;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
 import com.owino.mobiletranslate.ios.model.LocalizableTable;
+import com.owino.mobiletranslate.rest.payload.IOSMessage;
 
 public interface LocalizableFileProcessor {
 
@@ -23,7 +26,9 @@ public interface LocalizableFileProcessor {
      *
      * @param textLineOfLocalizable String
      * @return com.owino.mobiletranslate.ios.model.LocalizableTable
+     *
      */
+
     LocalizableTable getLocalizableTableFromString(String textLineOfLocalizable);
 
     /**
@@ -65,4 +70,13 @@ public interface LocalizableFileProcessor {
      * @return File
      */
     File generateRootTranslationsOutputFolder() throws IOException;
+
+    /**
+     * Processes the request payload to a target language
+     * @param languageTranslations request body payload
+     * @param targetLanguage  locale to target
+     * @return list of translated strings
+     */
+   List<IOSMessage> translateLocalizable(List<IOSMessage> languageTranslations,String targetLanguage);
+
 }

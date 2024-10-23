@@ -3,8 +3,13 @@ package com.owino.mobiletranslate.ios;
 import com.owino.mobiletranslate.common.TranslationProcessor;
 import com.owino.mobiletranslate.ios.translate.LocalizableFileProcessor;
 import com.owino.mobiletranslate.ios.translate.impl.LocalizableFileProcessorImpl;
+import com.owino.mobiletranslate.rest.payload.IOSMessage;
+import com.owino.mobiletranslate.rest.payload.TranslationResponse;
+
 import java.io.File;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class iOSTranslationProcessor implements TranslationProcessor {
     private LocalizableFileProcessor processor;
     public iOSTranslationProcessor() {
@@ -17,5 +22,20 @@ public class iOSTranslationProcessor implements TranslationProcessor {
             var translatedTable = processor.translateLocalizableTable(localizableTable, targetLanguage);
             processor.placeTranslatedTextInDestinationDir(translatedTable, targetLanguage);
         }
+    }
+    public TranslationResponse runTranslation(List<IOSMessage> input, List<String> targetLanguages){
+        Map<String, Map<String, String>> allTranslations = targetLanguages.stream()
+                .collect(Collectors.toMap(
+                        targetLanguage -> targetLanguage,
+                        targetLanguage -> processor.translateLocalizable(input, targetLanguage).stream()
+                                .collect(Collectors.toMap(IOSMessage::key, IOSMessage::content))
+                ));
+
+        return  new TranslationResponse(
+                "TRANSLATION",
+                "IOS",
+                allTranslations
+        );
+
     }
 }
